@@ -98,12 +98,19 @@ export default function Hero() {
                   background: "radial-gradient(circle at center 60%, rgba(0,212,170,0.2) 0%, rgba(0,212,170,0.04) 50%, transparent 75%)",
                 }}
               />
-              <img
-                src="/assets/hero-portrait.png"
-                alt={profile.name}
-                className="relative h-full w-auto max-w-[90%] lg:max-w-none object-contain object-bottom drop-shadow-[0_0_60px_rgba(0,0,0,0.6)]"
-                draggable={false}
-              />
+              <picture>
+                <source srcSet="/assets/hero-portrait.webp" type="image/webp" />
+                <img
+                  src="/assets/hero-portrait.png"
+                  alt={profile.name}
+                  width="800"
+                  height="533"
+                  loading="eager"
+                  fetchPriority="high"
+                  className="relative h-full w-auto max-w-[90%] lg:max-w-none object-contain object-bottom drop-shadow-[0_0_60px_rgba(0,0,0,0.6)]"
+                  draggable={false}
+                />
+              </picture>
             </div>
           </motion.div>
         </div>
