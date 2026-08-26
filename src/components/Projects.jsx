@@ -5,6 +5,15 @@ import { projects } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 
+function ProjectPlaceholder({ name, className = "" }) {
+  const initials = name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  return (
+    <div className={`flex items-center justify-center bg-gradient-to-br from-primary/20 via-primary/5 to-transparent ${className}`}>
+      <span className="text-primary/40 text-5xl font-bold select-none">{initials}</span>
+    </div>
+  );
+}
+
 function ProjectCard({ project, index, onOpen }) {
   const { theme } = useTheme();
 
@@ -22,17 +31,16 @@ function ProjectCard({ project, index, onOpen }) {
       >
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/2 h-56 md:h-auto min-h-[280px] relative overflow-hidden">
-            <div className={`absolute inset-0 ${
-              theme === "dark" ? "bg-[#1A1A1D]" : "bg-[#F0F0F2]"
-            }`}>
+            {project.image ? (
               <img
                 src={project.image}
                 alt={project.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                onError={(e) => { e.target.style.display = "none"; }}
+                onError={(e) => { e.target.style.display = "none"; e.target.parentNode.classList.add('hidden-fallback'); }}
               />
-            </div>
-            <div className="absolute top-4 left-4">
+            ) : null}
+            <ProjectPlaceholder name={project.name} className="w-full h-full absolute inset-0" />
+            <div className="absolute top-4 left-4 z-10">
               <span className="px-3 py-1 bg-primary text-[#0A0A0B] text-xs font-semibold rounded-lg">
                 FEATURED
               </span>
@@ -93,15 +101,16 @@ function ProjectCard({ project, index, onOpen }) {
           : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-lg"
       }`}
     >
-      <div className={`h-48 relative overflow-hidden ${
-        theme === "dark" ? "bg-[#1A1A1D]" : "bg-[#F0F0F2]"
-      }`}>
-        <img
-          src={project.image}
-          alt={project.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          onError={(e) => { e.target.style.display = "none"; }}
-        />
+      <div className="h-48 relative overflow-hidden">
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => { e.target.style.display = "none"; }}
+          />
+        ) : null}
+        <ProjectPlaceholder name={project.name} className="w-full h-full absolute inset-0" />
       </div>
       <div className="p-6">
         <span className="text-primary text-xs font-semibold tracking-widest uppercase">
