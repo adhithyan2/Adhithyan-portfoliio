@@ -1,0 +1,333 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, ExternalLink, ChevronRight, X } from "lucide-react";
+import { projects } from "../data/portfolioData";
+import { useTheme } from "../hooks/useTheme";
+import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+
+function ProjectCard({ project, index, onOpen }) {
+  const { theme } = useTheme();
+
+  if (project.featured) {
+    return (
+      <motion.div
+        variants={fadeUp}
+        custom={index}
+        onClick={() => onOpen(project)}
+        className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 ${
+          theme === "dark"
+            ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
+            : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-lg"
+        } col-span-1 md:col-span-2 lg:col-span-3`}
+      >
+        <div className="flex flex-col md:flex-row">
+          <div className="md:w-1/2 h-56 md:h-auto min-h-[280px] relative overflow-hidden">
+            <div className={`absolute inset-0 ${
+              theme === "dark" ? "bg-[#1A1A1D]" : "bg-[#F0F0F2]"
+            }`}>
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={(e) => { e.target.style.display = "none"; }}
+              />
+            </div>
+            <div className="absolute top-4 left-4">
+              <span className="px-3 py-1 bg-primary text-[#0A0A0B] text-xs font-semibold rounded-lg">
+                FEATURED
+              </span>
+            </div>
+          </div>
+          <div className="md:w-1/2 p-8 flex flex-col justify-center">
+            <span className="text-primary text-xs font-semibold tracking-widest uppercase mb-3">
+              {project.category}
+            </span>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">
+              {project.name}
+            </h3>
+            <p className={`text-sm md:text-base mb-6 leading-relaxed ${
+              theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+            }`}>
+              {project.tagline}
+            </p>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {project.stack.slice(0, 5).map((tech) => (
+                <span
+                  key={tech}
+                  className={`px-2.5 py-1 text-xs rounded-md font-medium ${
+                    theme === "dark"
+                      ? "bg-white/[0.06] text-[#8A8A8E]"
+                      : "bg-black/[0.04] text-[#6B6B70]"
+                  }`}
+                >
+                  {tech}
+                </span>
+              ))}
+              {project.stack.length > 5 && (
+                <span className={`px-2.5 py-1 text-xs rounded-md font-medium ${
+                  theme === "dark" ? "bg-white/[0.06] text-[#8A8A8E]" : "bg-black/[0.04] text-[#6B6B70]"
+                }`}>
+                  +{project.stack.length - 5}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-primary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                View Details <ChevronRight size={16} />
+              </span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      variants={fadeUp}
+      custom={index}
+      onClick={() => onOpen(project)}
+      className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 ${
+        theme === "dark"
+          ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
+          : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-lg"
+      }`}
+    >
+      <div className={`h-48 relative overflow-hidden ${
+        theme === "dark" ? "bg-[#1A1A1D]" : "bg-[#F0F0F2]"
+      }`}>
+        <img
+          src={project.image}
+          alt={project.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          onError={(e) => { e.target.style.display = "none"; }}
+        />
+      </div>
+      <div className="p-6">
+        <span className="text-primary text-xs font-semibold tracking-widest uppercase">
+          {project.category}
+        </span>
+        <h3 className="text-lg font-bold mt-2 mb-2 tracking-tight">
+          {project.name}
+        </h3>
+        <p className={`text-sm mb-4 leading-relaxed ${
+          theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+        }`}>
+          {project.tagline}
+        </p>
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {project.stack.slice(0, 3).map((tech) => (
+            <span
+              key={tech}
+              className={`px-2 py-1 text-xs rounded-md font-medium ${
+                theme === "dark"
+                  ? "bg-white/[0.06] text-[#8A8A8E]"
+                  : "bg-black/[0.04] text-[#6B6B70]"
+              }`}
+            >
+              {tech}
+            </span>
+          ))}
+          {project.stack.length > 3 && (
+            <span className={`px-2 py-1 text-xs rounded-md font-medium ${
+              theme === "dark" ? "bg-white/[0.06] text-[#8A8A8E]" : "bg-black/[0.04] text-[#6B6B70]"
+            }`}>
+              +{project.stack.length - 3}
+            </span>
+          )}
+        </div>
+        <span className="text-primary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+          View Details <ChevronRight size={16} />
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+function ProjectModal({ project, onClose }) {
+  const { theme } = useTheme();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+        onClick={(e) => e.stopPropagation()}
+        className={`relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl p-8 ${
+          theme === "dark"
+            ? "bg-[#111113] border border-white/[0.08]"
+            : "bg-white border border-black/[0.08] shadow-xl"
+        }`}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-lg hover:bg-white/10 transition-colors"
+          aria-label="Close"
+        >
+          <X size={20} />
+        </button>
+
+        <span className="text-primary text-xs font-semibold tracking-widest uppercase">
+          {project.category}
+        </span>
+        <h3 className="text-2xl md:text-3xl font-bold mt-2 mb-2 tracking-tight">
+          {project.name}
+        </h3>
+        <p className={`text-sm mb-6 leading-relaxed ${
+          theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+        }`}>
+          {project.description}
+        </p>
+
+        {project.features && (
+          <div className="mb-6">
+            <h4 className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+              Key Features
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {project.features.map((feat) => (
+                <span
+                  key={feat}
+                  className={`px-3 py-1.5 text-sm rounded-lg font-medium ${
+                    theme === "dark"
+                      ? "bg-white/[0.06] text-[#8A8A8E]"
+                      : "bg-black/[0.04] text-[#6B6B70]"
+                  }`}
+                >
+                  {feat}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+            Tech Stack
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {project.stack.map((tech) => (
+              <span
+                key={tech}
+                className={`px-3 py-1.5 text-sm rounded-lg font-medium ${
+                  theme === "dark"
+                    ? "bg-primary/10 text-primary"
+                    : "bg-primary/10 text-primary"
+                }`}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          {project.githubUrl && project.githubUrl !== "PLACEHOLDER_GITHUB_URL" && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+            >
+              <Github size={16} /> GitHub
+            </a>
+          )}
+          {project.liveUrl && project.liveUrl !== "PLACEHOLDER_LIVE_DEMO" && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+            >
+              <ExternalLink size={16} /> Live Demo
+            </a>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function MoreProjectsTile() {
+  const { theme } = useTheme();
+
+  return (
+    <div
+      className={`rounded-2xl border-2 border-dashed flex flex-col items-center justify-center p-8 min-h-[280px] transition-all duration-300 ${
+        theme === "dark"
+          ? "border-white/10 hover:border-primary/30"
+          : "border-black/10 hover:border-primary/30"
+      }`}
+    >
+      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+        theme === "dark" ? "bg-white/[0.06]" : "bg-black/[0.04]"
+      }`}>
+        <ChevronRight size={24} className="text-primary" />
+      </div>
+      <h3 className="text-lg font-bold mb-2">More Projects</h3>
+      <p className={`text-sm text-center ${theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}`}>
+        More projects coming soon. Always building, always learning.
+      </p>
+    </div>
+  );
+}
+
+export default function Projects() {
+  const [selected, setSelected] = useState(null);
+  const { ref, controls } = useScrollReveal();
+
+  return (
+    <section id="projects" className="py-24 md:py-32">
+      <div className="max-w-[1320px] mx-auto px-6">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={staggerContainer}
+        >
+          <motion.span
+            variants={fadeUp}
+            className="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            Projects
+          </motion.span>
+
+          <motion.h2
+            variants={fadeUp}
+            custom={1}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
+          >
+            Things I've Built.
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, i) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={i + 2}
+                onOpen={setSelected}
+              />
+            ))}
+            <MoreProjectsTile />
+          </div>
+        </motion.div>
+      </div>
+
+      <AnimatePresence>
+        {selected && (
+          <ProjectModal project={selected} onClose={() => setSelected(null)} />
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
