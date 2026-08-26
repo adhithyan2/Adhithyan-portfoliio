@@ -6,7 +6,7 @@ import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 
 function ProjectPlaceholder({ name, className = "" }) {
-  const initials = name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  const initials = name.replace(/[^a-zA-Z ]/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 2).toUpperCase();
   return (
     <div className={`flex items-center justify-center bg-gradient-to-br from-primary/20 via-primary/5 to-transparent ${className}`}>
       <span className="text-primary/40 text-5xl font-bold select-none">{initials}</span>
