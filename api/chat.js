@@ -1,7 +1,7 @@
 import { buildPortfolioContext } from "../src/data/portfolioContext.js";
 
 export const config = {
-  maxDuration: 60,
+  maxDuration: 10,
 };
 
 const LYZR_API_KEY = process.env.LYZR_API_KEY;
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     const enrichedMessage = `You are "Adhi", the AI assistant for Adhithiyan Prabaharan's portfolio website.\n\nUse the following portfolio information to answer the user's questions accurately. If you are asked something not in this context, answer honestly that you don't know rather than inventing facts.\n\n---PORTFOLIO CONTEXT START---\n${context}\n---PORTFOLIO CONTEXT END---\n\nUser question: ${message}`;
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 55000);
+    const timeout = setTimeout(() => controller.abort(), 9000);
 
     let upstream;
     try {
