@@ -11,8 +11,21 @@ export default async function handler(req, res) {
 
   const { message, session_id } = req.body;
 
-  if (!message || !LYZR_API_KEY) {
-    res.status(400).json({ error: "Missing message or server config" });
+  if (!message) {
+    res.status(400).json({ error: "Missing message in request body" });
+    return;
+  }
+
+  const missing = [
+    "LYZR_API_KEY",
+    "LYZR_USER_ID",
+    "LYZR_AGENT_ID",
+  ].filter((k) => !process.env[k]);
+
+  if (missing.length > 0) {
+    res.status(500).json({
+      error: `Server not configured. Missing env vars on Vercel: ${missing.join(", ")}. Add them in Vercel → Settings → Environment Variables, then redeploy.`,
+    });
     return;
   }
 
