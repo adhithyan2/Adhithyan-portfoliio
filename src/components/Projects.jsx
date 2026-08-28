@@ -23,10 +23,10 @@ function ProjectCard({ project, index, onOpen }) {
         variants={fadeUp}
         custom={index}
         onClick={() => onOpen(project)}
-        className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 ${
+        className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
           theme === "dark"
-            ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
-            : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-lg"
+            ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
+            : "hover:border-primary/30 shadow-sm hover:shadow-lg"
         } col-span-1 md:col-span-2 lg:col-span-3`}
       >
         <div className="flex flex-col md:flex-row">
@@ -95,11 +95,11 @@ function ProjectCard({ project, index, onOpen }) {
       variants={fadeUp}
       custom={index}
       onClick={() => onOpen(project)}
-      className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 ${
-        theme === "dark"
-          ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
-          : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-lg"
-      }`}
+className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
+          theme === "dark"
+            ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
+            : "hover:border-primary/30 shadow-sm hover:shadow-lg"
+        }`}
     >
       <div className="h-48 relative overflow-hidden">
         {project.image ? (

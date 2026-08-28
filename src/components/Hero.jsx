@@ -31,7 +31,7 @@ export default function Hero() {
             >
               Building Digital<br />
               Products That Solve<br />
-              <span className="text-primary">Real Problems.</span>
+              <span className="gradient-text">Real Problems.</span>
             </motion.h1>
 
             <motion.p
@@ -111,6 +111,49 @@ export default function Hero() {
                   draggable={false}
                 />
               </picture>
+
+              <div className="absolute top-[12%] -left-2 md:left-6 float-icon">
+                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
+                  theme === "dark" ? "text-white" : "text-[#0A0A0B]"
+                }`}>
+                  React.js
+                </span>
+              </div>
+              <div className="absolute top-[30%] -right-1 md:right-4 float-icon">
+                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
+                  theme === "dark" ? "text-white" : "text-[#0A0A0B]"
+                }`}>
+                  Node.js
+                </span>
+              </div>
+              <div className="absolute top-[55%] -left-4 md:left-0 float-icon">
+                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
+                  theme === "dark" ? "text-white" : "text-[#0A0A0B]"
+                }`}>
+                  MongoDB
+                </span>
+              </div>
+              <div className="absolute top-[70%] right-0 md:right-6 float-icon">
+                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
+                  theme === "dark" ? "text-white" : "text-[#0A0A0B]"
+                }`}>
+                  Python
+                </span>
+              </div>
+              <div className="absolute top-[8%] right-[15%] md:right-[20%] float-icon">
+                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
+                  theme === "dark" ? "text-white" : "text-[#0A0A0B]"
+                }`}>
+                  AI/ML
+                </span>
+              </div>
+              <div className="absolute top-[45%] -left-6 md:left-10 float-icon">
+                <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
+                  theme === "dark" ? "text-white" : "text-[#0A0A0B]"
+                }`}>
+                  Vite
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>

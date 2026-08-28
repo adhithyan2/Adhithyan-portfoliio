@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { profile } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import TerminalCard from "./TerminalCard";
 
 export default function About() {
   const { theme } = useTheme();
@@ -53,6 +54,8 @@ export default function About() {
               I'm a product-focused builder who values clean code, thoughtful design, and the discipline of continuous learning. Every project I take on is a chance to get better at the craft.
             </p>
           </motion.div>
+
+          <TerminalCard />
         </motion.div>
       </div>
     </section>
