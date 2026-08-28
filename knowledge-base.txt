@@ -1,0 +1,118 @@
+# Adhithiyan Prabaharan — Portfolio Knowledge Base
+
+## About
+Adhithiyan Prabaharan is a Full-Stack Developer and B.Tech Computer Science and Business Systems (CSBS) student at Jansons Institute of Technology, based in India.
+
+His tagline: "Building Digital Products That Solve Real Problems."
+
+Subtitle/roles: CSBS Student • Full-Stack Developer • AI Enthusiast • Open-Source Builder
+
+He believes in building software that solves real problems rather than just learning technology for its own sake. He is working toward building an open-source freelancer ecosystem that makes it easier for developers to turn ideas into real digital products for actual businesses and users. He is a product-focused builder who values clean code, thoughtful design, and the discipline of continuous learning.
+
+## Contact / Socials
+- GitHub: https://github.com/adhithyan2
+- LinkedIn: https://www.linkedin.com/in/adhithyan-prabaharan-bb9632318
+- Email: adhithiyanprabaharan@gmail.com
+
+## Skills
+
+### Programming
+Python, Java, C++, JavaScript
+
+### Frontend
+React.js, Vite, Tailwind CSS, HTML, CSS, React Router, Framer Motion
+
+### Backend
+Node.js, Express.js, REST APIs
+
+### Database
+MongoDB, MySQL
+
+### Tools & Platforms
+Git, GitHub, Firebase, VS Code
+
+### Areas of Interest
+Full-Stack Development, Artificial Intelligence, Machine Learning, UI/UX, Automation, Open Source
+
+## Projects
+
+### 1. QueueBook (FEATURED — Full-Stack Web Application)
+An appointment and queue management platform that helps users book services, track live queue status, estimate waiting time, and manage appointments without physically waiting in line.
+
+Features: appointment booking, live queue status, estimated waiting time, customer dashboard, business dashboard, appointment history, notifications, QR-based queue info, service discovery.
+
+Tech stack: React.js, Vite, Tailwind CSS, Node.js, Express.js, MongoDB, Firebase/JWT, Socket.IO.
+
+### 2. Namma Uzhavan (Smart Agriculture / Real-World Problem Solving)
+An agriculture-focused digital platform designed to provide useful technology-driven solutions for farmers and improve access to agricultural information and services.
+
+Tech stack: modern web technologies, APIs, database technologies, AI-enabled features where applicable.
+
+### 3. FAC — Facial Attendance Checker (AI / Computer Vision)
+A facial recognition based attendance system designed to automate attendance management using computer vision.
+
+Tech stack: Python, OpenCV, Face Recognition.
+
+### 4. AI Meeting Buddy (Artificial Intelligence)
+An AI-powered productivity concept designed to assist users during meetings by helping capture, organize, and process important meeting information.
+
+Tech stack: Python, AI/ML concepts, APIs, modern web technologies.
+
+### 5. TemplateMind AI (AI / Document Technology)
+Tagline: "Edit the content. Keep the design."
+An AI-powered document editing and generation concept focused on modifying PDF content while preserving the original document's fonts, alignment, colors, tables, headers, footers, and overall layout.
+
+Tech stack: React, Tailwind CSS, Python, FastAPI, PyMuPDF, pdfplumber, ReportLab, AI APIs.
+
+### 6. Smart Traffic Management System (Smart City / AI)
+A smart traffic management project concept focused on using technology and intelligent systems to improve traffic flow and urban transportation.
+
+## Experience / Journey
+
+1. Foundation — Programming Fundamentals: Started with core programming concepts, learning problem-solving approaches and computational thinking.
+2. Languages — Python, Java & C++: Built strong foundations across multiple programming paradigms — object-oriented, functional, and procedural.
+3. Data & Web — Databases & Web Development: Dove into MongoDB, MySQL, HTML, CSS, and JavaScript — understanding how data flows through web applications.
+4. Real Products — Building Real-World Applications: Transitioned from tutorials to shipping actual products — solving real problems for real users.
+5. Full Stack — Full-Stack Projects: Mastered end-to-end development with React, Node.js, Express, and database design across multiple projects.
+6. AI & Beyond — AI, Automation & Open Source: Exploring AI-powered applications, automation, and building toward an open-source freelancer ecosystem.
+
+## Services Offered ("What I Can Build")
+
+- Business Websites: Professional, fast-loading websites tailored for businesses that need an effective online presence.
+- Portfolio Websites: Personal portfolio sites that showcase your work and tell your story with style.
+- Full-Stack Web Applications: End-to-end web applications with modern frontend, robust backend, and scalable databases.
+- Landing Pages: High-converting landing pages designed to capture attention and drive action.
+- Admin Dashboards: Clean, intuitive admin panels for managing data, users, and business operations.
+- Appointment & Booking Systems: Custom scheduling and queue management solutions like QueueBook.
+- Database-Driven Applications: Applications built around well-designed data models and efficient database operations.
+- AI-Powered Web Applications: Integrating AI and ML capabilities into web products for smarter user experiences.
+- API Integration: Connecting third-party services and building RESTful APIs to power your applications.
+- Custom Software Solutions: Bespoke software built to solve specific business problems that off-the-shelf tools can't.
+
+## Achievements / Milestones
+
+- Projects Built: 6+
+- Full-Stack Development: Yes
+- AI & Automation: Yes
+- Open Source: Yes
+- Continuous Learning: Always
+
+## Open Source
+
+Mission: "Building in Public. Building for Everyone."
+
+Adhithiyan believes software becomes more powerful when knowledge, tools, and ideas are shared. He is working toward building useful open-source projects and a freelancer-oriented ecosystem that makes it easier to turn ideas into real digital products. Planned/featured repos include:
+
+- queuebook-core: Core engine for the QueueBook appointment & queue management system (JavaScript).
+- template-mind: AI-powered PDF content editing while preserving layout (Python).
+- fac-toolkit: Facial recognition attendance toolkit — plug-and-play (Python).
+
+## How to answer visitors
+
+- Help visitors explore skills, projects, education, achievements, experience, interests, and contact information.
+- Recommend the most relevant project for a specific role or topic.
+- Ask what the visitor needs help with (website, web app, AI product, etc.) and connect them with contact info: adhithiyanprabaharan@gmail.com.
+
+## Tone
+
+Friendly, professional, concise, helpful. Speak as "Adhi," the AI assistant for Adhithiyan's portfolio.
