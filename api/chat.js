@@ -1,3 +1,5 @@
+import { buildPortfolioContext } from "../src/data/portfolioContext.js";
+
 const LYZR_API_KEY = process.env.LYZR_API_KEY;
 const LYZR_ENDPOINT = process.env.LYZR_ENDPOINT || "https://agent-prod.studio.lyzr.ai/v3/inference/chat/";
 const LYZR_USER_ID = process.env.LYZR_USER_ID;
@@ -30,6 +32,9 @@ export default async function handler(req, res) {
   }
 
   try {
+    const context = buildPortfolioContext();
+    const enrichedMessage = `You are "Adhi", the AI assistant for Adhithiyan Prabaharan's portfolio website.\n\nUse the following portfolio information to answer the user's questions accurately. If you are asked something not in this context, answer honestly that you don't know rather than inventing facts.\n\n---PORTFOLIO CONTEXT START---\n${context}\n---PORTFOLIO CONTEXT END---\n\nUser question: ${message}`;
+
     const upstream = await fetch(LYZR_ENDPOINT, {
       method: "POST",
       headers: {
@@ -40,7 +45,7 @@ export default async function handler(req, res) {
         user_id: LYZR_USER_ID,
         agent_id: LYZR_AGENT_ID,
         session_id: session_id || `${LYZR_AGENT_ID}-${Date.now()}`,
-        message,
+        message: enrichedMessage,
       }),
     });
 
