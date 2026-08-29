@@ -10,6 +10,10 @@ export default function CursorGlow() {
     if (!dot || !ring) return;
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    document.documentElement.classList.add("cursor-glow-on");
+    dot.classList.remove("hidden");
+    ring.classList.remove("hidden");
+
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let ringX = mouseX;
@@ -41,6 +45,9 @@ export default function CursorGlow() {
     raf = requestAnimationFrame(loop);
 
     return () => {
+      document.documentElement.classList.remove("cursor-glow-on");
+      dot.classList.add("hidden");
+      ring.classList.add("hidden");
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseover", onOver);
       cancelAnimationFrame(raf);

@@ -140,13 +140,11 @@ body {
     border-color: rgba(0, 0, 0, 0.6);
     background: rgba(0, 0, 0, 0.1);
   }
-  .dark body,
-  .light body {
-    cursor: none;
-  }
-  .dark a, .dark button,
-  .light a, .light button {
-    cursor: none;
+  .cursor-glow-on,
+  .cursor-glow-on a, .cursor-glow-on button,
+  .cursor-glow-on [role=button], .cursor-glow-on input,
+  .cursor-glow-on textarea, .cursor-glow-on select {
+    cursor: none !important;
   }
 }
 
