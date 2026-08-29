@@ -93,9 +93,14 @@ export default function Hero() {
             <div className="relative h-[320px] sm:h-[400px] md:h-[480px] lg:h-[600px] w-full flex justify-center lg:justify-end items-end">
               {/* Subtle glow behind portrait */}
               <div
-                className="absolute bottom-0 right-0 w-[300px] h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px] rounded-full opacity-30 blur-[80px]"
+                className={`absolute bottom-0 right-0 w-[300px] h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px] rounded-full ${
+                  theme === "dark" ? "opacity-30" : "opacity-20"
+                } blur-[80px]`}
                 style={{
-                  background: "radial-gradient(circle at center 60%, rgba(0,212,170,0.2) 0%, rgba(0,212,170,0.04) 50%, transparent 75%)",
+                  background:
+                    theme === "dark"
+                      ? "radial-gradient(circle at center 60%, rgba(0,212,170,0.2) 0%, rgba(0,212,170,0.04) 50%, transparent 75%)"
+                      : "radial-gradient(circle at center 60%, rgba(11,122,92,0.16) 0%, rgba(11,122,92,0.04) 50%, transparent 75%)",
                 }}
               />
               <picture>
@@ -107,7 +112,11 @@ export default function Hero() {
                   height="533"
                   loading="eager"
                   fetchPriority="high"
-                  className="relative h-full w-auto max-w-[90%] lg:max-w-none object-contain object-bottom drop-shadow-[0_0_60px_rgba(0,0,0,0.6)]"
+                  className={`relative h-full w-auto max-w-[90%] lg:max-w-none object-contain object-bottom ${
+                    theme === "dark"
+                      ? "drop-shadow-[0_0_60px_rgba(0,0,0,0.6)]"
+                      : "drop-shadow-[0_4px_40px_rgba(0,0,0,0.22)]"
+                  }`}
                   draggable={false}
                 />
               </picture>
