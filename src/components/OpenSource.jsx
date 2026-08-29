@@ -1,21 +1,49 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { socials, activityData } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 
+const GH_USERNAME = "adhithyan2";
+
 function ContributionGraph() {
   const { theme } = useTheme();
-  const weeks = 52;
-  const levels = [0, 1, 2, 3, 4];
+  const [cells, setCells] = useState(
+    activityData.map((d) => ({ level: getLevel(d.count), count: d.count }))
+  );
+  const [source, setSource] = useState("placeholder");
 
-  const getLevel = (count) => {
+  function getLevel(count) {
     if (count === 0) return 0;
     if (count <= 1) return 1;
     if (count <= 2) return 2;
     if (count <= 3) return 3;
     return 4;
-  };
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`https://github-contributions-api.deno.dev/${GH_USERNAME}.json`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`API ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        if (cancelled || !data?.contributions) return;
+        const weeks = data.contributions;
+        const flat = weeks.flatMap((w) => w);
+        const recent = flat.slice(-91); // ~13 weeks, fits layout
+        if (recent.length > 0) {
+          setCells(recent.map((item) => ({ level: getLevel(item.count || 0), count: item.count || 0 })));
+          setSource("live");
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const getColor = (level) => {
     if (theme === "dark") {
@@ -26,24 +54,28 @@ function ContributionGraph() {
     return colors[level];
   };
 
-  const cells = activityData.map((d) => ({
-    ...d,
-    level: getLevel(d.count),
-  }));
-
   return (
-    <div className="overflow-x-auto pb-2">
-      <div className="flex gap-[3px] min-w-fit">
-        {cells.map((cell, i) => (
-          <div key={i} className="flex flex-col gap-[3px]">
-            <div
-              className="w-[11px] h-[11px] rounded-[2px] transition-colors"
-              style={{ backgroundColor: getColor(cell.level) }}
-              title={`${cell.count} contributions`}
-            />
-          </div>
-        ))}
+    <div>
+      <div className="overflow-x-auto pb-2">
+        <div className="flex gap-[3px] min-w-fit">
+          {cells.map((cell, i) => (
+            <div key={i} className="flex flex-col gap-[3px]">
+              <div
+                className="w-[11px] h-[11px] rounded-[2px] transition-colors duration-300"
+                style={{ backgroundColor: getColor(cell.level) }}
+                title={`${cell.count} contribution${cell.count === 1 ? "" : "s"}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
+      <p className={`text-xs mt-3 ${
+        theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+      }`}>
+        {source === "live"
+          ? "Live contribution data from GitHub."
+          : "Live GitHub data not reachable right now — showing placeholder activity."}
+      </p>
     </div>
   );
 }
@@ -124,11 +156,6 @@ export default function OpenSource() {
                 : "bg-white border border-black/[0.06] shadow-sm"
             }`}>
               <ContributionGraph />
-              <p className={`text-xs mt-3 ${
-                theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
-              }`}>
-                Placeholder contribution activity — connect to GitHub API for real data.
-              </p>
             </div>
           </motion.div>
         </motion.div>

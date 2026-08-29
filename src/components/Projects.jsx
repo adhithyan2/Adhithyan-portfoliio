@@ -4,6 +4,7 @@ import { Github, ExternalLink, ChevronRight, X } from "lucide-react";
 import { projects } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import TiltCard from "./TiltCard";
 
 function ProjectPlaceholder({ name, className = "" }) {
   const initials = name.replace(/[^a-zA-Z ]/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 2).toUpperCase();
@@ -19,16 +20,17 @@ function ProjectCard({ project, index, onOpen }) {
 
   if (project.featured) {
     return (
-      <motion.div
-        variants={fadeUp}
-        custom={index}
-        onClick={() => onOpen(project)}
-        className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
-          theme === "dark"
-            ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
-            : "hover:border-primary/30 shadow-sm hover:shadow-lg"
-        } col-span-1 md:col-span-2 lg:col-span-3`}
-      >
+      <TiltCard className="col-span-1 md:col-span-2 lg:col-span-3" maxTilt={4}>
+        <motion.div
+          variants={fadeUp}
+          custom={index}
+          onClick={() => onOpen(project)}
+          className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
+            theme === "dark"
+              ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
+              : "hover:border-primary/30 shadow-sm hover:shadow-lg"
+          }`}
+        >
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/2 h-56 md:h-auto min-h-[280px] relative overflow-hidden">
             {project.image ? (
@@ -86,21 +88,23 @@ function ProjectCard({ project, index, onOpen }) {
             </div>
           </div>
         </div>
-      </motion.div>
+        </motion.div>
+      </TiltCard>
     );
   }
 
   return (
-    <motion.div
-      variants={fadeUp}
-      custom={index}
-      onClick={() => onOpen(project)}
-className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
+    <TiltCard maxTilt={6}>
+      <motion.div
+        variants={fadeUp}
+        custom={index}
+        onClick={() => onOpen(project)}
+        className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
           theme === "dark"
             ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
             : "hover:border-primary/30 shadow-sm hover:shadow-lg"
         }`}
-    >
+      >
       <div className="h-48 relative overflow-hidden">
         {project.image ? (
           <img
@@ -149,7 +153,8 @@ className={`group rounded-2xl overflow-hidden cursor-pointer transition-all dura
           View Details <ChevronRight size={16} />
         </span>
       </div>
-    </motion.div>
+      </motion.div>
+    </TiltCard>
   );
 }
 

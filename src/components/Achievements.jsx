@@ -1,7 +1,48 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { achievements } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+
+function Counter({ value }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    if (!inView) return;
+
+    const match = String(value).match(/^(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) {
+      setDisplay(String(value));
+      return;
+    }
+
+    const target = parseFloat(match[1]);
+    const suffix = match[2] || "";
+    const duration = 1400;
+    let start = null;
+
+    let raf;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      setDisplay(
+        Number.isInteger(target)
+          ? `${Math.round(current)}${suffix}`
+          : `${current.toFixed(1)}${suffix}`
+      );
+      if (progress < 1) raf = requestAnimationFrame(step);
+    };
+
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value]);
+
+  return <span ref={ref}>{display}</span>;
+}
 
 export default function Achievements() {
   const { theme } = useTheme();
@@ -44,7 +85,7 @@ export default function Achievements() {
                 }`}
               >
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {item.value}
+                  <Counter value={item.value} />
                 </div>
                 <div className={`text-xs font-medium tracking-wider uppercase ${
                   theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"

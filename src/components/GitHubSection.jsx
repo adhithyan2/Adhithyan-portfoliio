@@ -1,12 +1,52 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { GitFork, Star } from "lucide-react";
-import { openSourceProjects } from "../data/portfolioData";
+import { GitFork, Star, Database } from "lucide-react";
+import { openSourceProjects, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
+
+const GH_USERNAME = "adhithyan2";
 
 export default function GitHubSection() {
   const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
+  const [repos, setRepos] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`https://api.github.com/users/${GH_USERNAME}/repos?sort=updated&per_page=6`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`GitHub API ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setRepos(
+            data.map((repo) => ({
+              name: repo.name,
+              description: repo.description,
+              language: repo.language || "—",
+              stars: repo.stargazers_count ?? 0,
+              forks: repo.forks_count ?? 0,
+              url: repo.html_url || socials.github,
+              updated: repo.updated_at,
+            }))
+          );
+        } else {
+          setError(true);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setError(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const reposToShow = repos || openSourceProjects;
 
   return (
     <section className="py-24 md:py-32">
@@ -29,11 +69,11 @@ export default function GitHubSection() {
             custom={1}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
-            Featured Repos.
+            {repos ? "Live From GitHub." : "Featured Repos."}
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {openSourceProjects.map((repo, i) => (
+            {reposToShow.map((repo, i) => (
               <motion.a
                 key={repo.name}
                 href={repo.url}
@@ -62,7 +102,7 @@ export default function GitHubSection() {
                 <p className={`text-sm mb-6 leading-relaxed ${
                   theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
                 }`}>
-                  {repo.description}
+                  {repo.description || "No description provided yet."}
                 </p>
                 <div className={`flex items-center gap-4 text-xs ${
                   theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
@@ -77,6 +117,18 @@ export default function GitHubSection() {
               </motion.a>
             ))}
           </div>
+
+          {error && (
+            <motion.p
+              variants={fadeUp}
+              custom={6}
+              className={`mt-6 flex items-center gap-2 text-xs ${
+                theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+              }`}
+            >
+              <Database size={14} /> Couldn't reach GitHub API — showing placeholders. The repos load live on most visitors' devices.
+            </motion.p>
+          )}
         </motion.div>
       </div>
     </section>
