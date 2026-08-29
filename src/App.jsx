@@ -13,12 +13,10 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ChatWidget from "./components/ChatWidget";
 import MusicPlayer from "./components/MusicPlayer";
-import CursorGlow from "./components/CursorGlow";
 
 export default function App() {
   return (
     <div className="min-h-screen">
-      <CursorGlow />
       <ScrollProgress />
       <Navbar />
       <main>
