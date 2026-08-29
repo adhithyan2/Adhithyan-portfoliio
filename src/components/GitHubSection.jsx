@@ -7,6 +7,23 @@ import SectionLabel from "./SectionLabel";
 
 const GH_USERNAME = "adhithyan2";
 
+const PROJECT_IMAGES = {
+  queuebook: "/assets/projects/queuebook.svg",
+  "namma-uzhavan": "/assets/projects/namma-uzhavan.svg",
+  fac: "/assets/projects/fac.svg",
+  "ai-meeting-buddy": "/assets/projects/ai-meeting-buddy.svg",
+  templatemind: "/assets/projects/templatemind.svg",
+  "smart-traffic": "/assets/projects/smart-traffic.svg",
+};
+
+function resolveImage(repo) {
+  if (repo.image) return repo.image;
+  const key = Object.keys(PROJECT_IMAGES).find((k) =>
+    repo.name.toLowerCase().includes(k)
+  );
+  return key ? PROJECT_IMAGES[key] : "/assets/repo-generic.svg";
+}
+
 const LANG_COLORS = {
   JavaScript: "#f1e05a",
   TypeScript: "#3178c6",
@@ -172,9 +189,17 @@ export default function GitHubSection() {
                       {repo.language}
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed text-[#4e4e4e] dark:text-[#9a9a9a] mt-1 max-w-2xl">
-                    {repo.description || "No description provided yet."}
-                  </p>
+                  <div className="flex items-start gap-4 mt-3">
+                    <img
+                      src={resolveImage(repo)}
+                      alt={repo.name}
+                      loading="lazy"
+                      className="hidden sm:block w-28 md:w-36 aspect-[16/10] object-cover rounded-lg border border-[#d2d2d2] dark:border-white/15 shrink-0"
+                    />
+                    <p className="text-sm leading-relaxed text-[#4e4e4e] dark:text-[#9a9a9a] max-w-2xl">
+                      {repo.description || "No description provided yet."}
+                    </p>
+                  </div>
                   {repo.languages && <LanguageBars languages={repo.languages} />}
                   <div className="flex items-center gap-4 mt-3">
                     <span className="eyebrow text-[11px] tabular-nums text-[#9a9a9a] flex items-center gap-1.5">

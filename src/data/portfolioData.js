@@ -57,7 +57,7 @@ export const projects = [
     stack: ["React.js", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Firebase/JWT", "Socket.IO"],
     githubUrl: "PLACEHOLDER_GITHUB_URL",
     liveUrl: "PLACEHOLDER_LIVE_DEMO",
-    image: "/assets/projects/queuebook.png",
+    image: "/assets/projects/queuebook.svg",
     featured: true,
   },
   {
@@ -78,7 +78,7 @@ export const projects = [
     stack: ["React.js", "Node.js", "REST APIs", "MongoDB", "AI Features"],
     githubUrl: "PLACEHOLDER_GITHUB_URL",
     liveUrl: "PLACEHOLDER_LIVE_DEMO",
-    image: "/assets/projects/namma-uzhavan.png",
+    image: "/assets/projects/namma-uzhavan.svg",
     featured: false,
   },
   {
@@ -99,7 +99,7 @@ export const projects = [
     stack: ["Python", "OpenCV", "Face Recognition", "Flask"],
     githubUrl: "PLACEHOLDER_GITHUB_URL",
     liveUrl: null,
-    image: "/assets/projects/fac.png",
+    image: "/assets/projects/fac.svg",
     featured: false,
   },
   {
@@ -120,7 +120,7 @@ export const projects = [
     stack: ["Python", "AI/ML", "APIs", "React"],
     githubUrl: "PLACEHOLDER_GITHUB_URL",
     liveUrl: null,
-    image: "/assets/projects/ai-meeting-buddy.png",
+    image: "/assets/projects/ai-meeting-buddy.svg",
     featured: false,
   },
   {
@@ -141,7 +141,7 @@ export const projects = [
     stack: ["React", "Tailwind CSS", "Python", "FastAPI", "PyMuPDF", "pdfplumber", "ReportLab", "AI APIs"],
     githubUrl: "PLACEHOLDER_GITHUB_URL",
     liveUrl: "PLACEHOLDER_LIVE_DEMO",
-    image: "/assets/projects/templatemind.png",
+    image: "/assets/projects/templatemind.svg",
     featured: false,
   },
   {
@@ -162,7 +162,7 @@ export const projects = [
     stack: ["Python", "AI/ML", "IoT Concepts", "Data Visualization"],
     githubUrl: "PLACEHOLDER_GITHUB_URL",
     liveUrl: null,
-    image: "/assets/projects/smart-traffic.png",
+    image: "/assets/projects/smart-traffic.svg",
     featured: false,
   },
 ];
@@ -222,9 +222,9 @@ export const achievements = [
 ];
 
 export const openSourceProjects = [
-  { name: "queuebook-core", description: "Core engine for the QueueBook appointment & queue management system", stars: 0, forks: 0, language: "JavaScript", url: "#" },
-  { name: "template-mind", description: "AI-powered PDF content editing while preserving layout", stars: 0, forks: 0, language: "Python", url: "#" },
-  { name: "fac-toolkit", description: "Facial recognition attendance toolkit — plug-and-play", stars: 0, forks: 0, language: "Python", url: "#" },
+  { name: "queuebook-core", description: "Core engine for the QueueBook appointment & queue management system", stars: 0, forks: 0, language: "JavaScript", url: "#", image: "/assets/projects/queuebook.svg" },
+  { name: "template-mind", description: "AI-powered PDF content editing while preserving layout", stars: 0, forks: 0, language: "Python", url: "#", image: "/assets/projects/templatemind.svg" },
+  { name: "fac-toolkit", description: "Facial recognition attendance toolkit — plug-and-play", stars: 0, forks: 0, language: "Python", url: "#", image: "/assets/projects/fac.svg" },
 ];
 
 export const activityData = [
