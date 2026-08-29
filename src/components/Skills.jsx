@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { skills } from "../data/portfolioData";
-import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
+import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 const skillGroups = [
@@ -14,7 +13,6 @@ const skillGroups = [
 ];
 
 export default function Skills() {
-  const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
 
   return (
@@ -26,45 +24,33 @@ export default function Skills() {
           animate={controls}
           variants={staggerContainer}
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-primary text-sm font-semibold tracking-widest uppercase"
-          >
+          <motion.span variants={fadeUp}>
             <SectionLabel index="02">Skills & Tech</SectionLabel>
           </motion.span>
 
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
+            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] mb-16"
           >
-            The Tools I Work With.
+            The tools I work with.
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
             {skillGroups.map((group, gi) => (
               <motion.div
                 key={group.key}
-                variants={scaleIn}
-                custom={gi * 0.5}
-                className={`rounded-2xl p-6 transition-all duration-300 ${
-                  theme === "dark"
-                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30"
-                    : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm"
-                }`}
+                variants={fadeUp}
+                custom={gi + 2}
               >
-                <h3 className="text-sm font-semibold tracking-widest uppercase text-primary mb-4">
+                <h3 className="eyebrow text-[#666] dark:text-[#9a9a9a] mb-5">
                   {group.label}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {skills[group.key].map((skill) => (
                     <span
                       key={skill}
-                      className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors duration-200 ${
-                        theme === "dark"
-                          ? "bg-white/[0.06] text-[#8A8A8E] hover:bg-primary/15 hover:text-primary"
-                          : "bg-black/[0.04] text-[#6B6B70] hover:bg-primary/15 hover:text-primary"
-                      }`}
+                      className="text-sm px-3.5 py-1.5 rounded-full border border-[#d2d2d2] dark:border-white/15 text-[#3d3d3d] dark:text-[#c9c9cc] hover:border-primary/60 hover:text-primary transition-colors duration-200"
                     >
                       {skill}
                     </span>

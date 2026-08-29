@@ -185,8 +185,8 @@ export default function MusicPlayer() {
             transition={{ duration: 0.2 }}
             className={`rounded-xl px-3 py-2.5 shadow-xl flex items-center gap-3 ${
               theme === "dark"
-                ? "bg-[#111113] border border-white/[0.1]"
-                : "bg-white border border-black/[0.1]"
+                ? "bg-[#111113] border border-white/15"
+                : "bg-white border border-[#d2d2d2]"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -236,14 +236,14 @@ export default function MusicPlayer() {
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setShowPanel((v) => !v)}
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-colors ${
+        className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-colors ${
           playing
             ? theme === "dark"
               ? "bg-primary text-[#0A0A0B] shadow-[0_8px_30px_rgba(0,212,170,0.35)]"
               : "bg-primary text-[#0A0A0B] shadow-[0_8px_30px_rgba(11,122,92,0.25)]"
             : theme === "dark"
-            ? "bg-[#111113] border border-white/10 text-[#8A8A8E] hover:text-white"
-            : "bg-white border border-black/10 text-[#6B6B70] hover:text-[#0A0A0B]"
+            ? "bg-[#111113] border border-white/15 text-[#9a9a9a] hover:text-white"
+            : "bg-white border border-[#d2d2d2] text-[#666] hover:text-[#1a1a1a]"
         }`}
         aria-label="Toggle lo-fi music"
       >

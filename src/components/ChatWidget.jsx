@@ -75,23 +75,23 @@ export default function ChatWidget() {
             transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
             className={`fixed bottom-24 right-5 md:right-6 z-[90] w-[calc(100vw-2.5rem)] max-w-[380px] rounded-2xl overflow-hidden shadow-2xl ${
               theme === "dark"
-                ? "bg-[#111113] border border-white/[0.1]"
-                : "bg-white border border-black/[0.1] shadow-black/20"
+                ? "bg-[#111113] border border-white/15"
+                : "bg-white border border-[#d2d2d2] shadow-black/20"
             }`}
           >
             <div className={`flex items-center justify-between px-4 py-3 border-b ${
-              theme === "dark" ? "bg-[#1A1A1D] border-white/[0.06]" : "bg-[#F0F0F2] border-black/[0.06]"
+              theme === "dark" ? "bg-[#161617] border-white/[0.08]" : "bg-[#FAFAFA] border-[#d2d2d2]"
             }`}>
               <div>
-                <p className="text-sm font-bold">Portfolio AI</p>
-                <p className={`text-xs ${theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}`}>
+                <p className="text-sm font-extrabold tracking-tight">Portfolio AI</p>
+                <p className="eyebrow text-[10px] text-[#9a9a9a]">
                   <span className="inline-block w-2 h-2 rounded-full bg-primary mr-1 animate-pulse" />
                   Ask me anything
                 </p>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 hover:bg-black/5 transition-colors"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -99,7 +99,7 @@ export default function ChatWidget() {
             </div>
 
             <div className={`h-[380px] overflow-y-auto p-4 space-y-3 ${
-              theme === "dark" ? "bg-[#111113]" : "bg-[#F8F9FA]"
+              theme === "dark" ? "bg-[#111113]" : "bg-[#FAFAFA]"
             }`}>
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -125,8 +125,8 @@ export default function ChatWidget() {
                       onClick={() => sendMessage(q)}
                       className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
                         theme === "dark"
-                          ? "bg-white/[0.04] border-white/[0.1] text-[#8A8A8E] hover:border-primary/50 hover:text-primary"
-                          : "bg-white border-black/[0.1] text-[#6B6B70] hover:border-primary/60 hover:text-primary"
+                          ? "bg-white/[0.04] border-white/15 text-[#9a9a9a] hover:border-primary/50 hover:text-primary"
+                          : "bg-white border-[#d2d2d2] text-[#666] hover:border-primary/60 hover:text-primary"
                       }`}
                     >
                       {q}
@@ -152,7 +152,7 @@ export default function ChatWidget() {
                 if (input.trim()) sendMessage(input.trim());
               }}
               className={`p-3 border-t flex items-center gap-2 ${
-                theme === "dark" ? "bg-[#111113] border-white/[0.06]" : "bg-white border-black/[0.06]"
+                theme === "dark" ? "bg-[#111113] border-white/[0.08]" : "bg-white border-[#d2d2d2]"
               }`}
             >
               <input
@@ -162,8 +162,8 @@ export default function ChatWidget() {
                 placeholder="Ask about projects, skills..."
                 className={`flex-1 px-3 py-2.5 rounded-xl text-sm outline-none ${
                   theme === "dark"
-                    ? "bg-[#1A1A1D] border border-white/[0.08] text-white focus:border-primary/40"
-                    : "bg-[#F8F9FA] border border-black/[0.08] text-[#0A0A0B] focus:border-primary/40"
+                    ? "bg-[#161617] border border-white/[0.1] text-white focus:border-primary/40"
+                    : "bg-[#FAFAFA] border border-[#d2d2d2] text-[#1a1a1a] focus:border-primary/50"
                 }`}
               />
               <button
@@ -186,7 +186,7 @@ export default function ChatWidget() {
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setOpen((o) => !o)}
-        className={`fixed bottom-6 right-5 md:right-6 z-[90] w-14 h-14 rounded-2xl bg-primary text-[#0A0A0B] flex items-center justify-center ${
+        className={`fixed bottom-6 right-5 md:right-6 z-[90] w-14 h-14 rounded-full bg-primary text-[#0A0A0B] flex items-center justify-center ${
           theme === "dark"
             ? "shadow-[0_8px_30px_rgba(0,212,170,0.35)]"
             : "shadow-[0_8px_30px_rgba(11,122,92,0.25)]"
