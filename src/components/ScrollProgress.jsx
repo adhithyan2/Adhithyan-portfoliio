@@ -10,8 +10,8 @@ export default function ScrollProgress() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[3px] bg-primary origin-left z-[60]"
-      style={{ scaleX }}
+      className="fixed top-0 left-0 right-0 h-[3px] bg-primary text-primary origin-left z-[70]"
+      style={{ scaleX, boxShadow: "0 0 8px currentColor" }}
     />
   );
 }

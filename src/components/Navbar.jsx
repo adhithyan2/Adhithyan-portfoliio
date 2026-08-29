@@ -8,11 +8,29 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState("#home");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((l) => document.getElementById(l.href.slice(1)))
+      .filter(Boolean);
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(`#${e.target.id}`);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -51,13 +69,22 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  theme === "dark"
+                className={`text-sm font-medium transition-colors duration-200 relative ${
+                  active === link.href
+                    ? "text-primary"
+                    : theme === "dark"
                     ? "text-[#8A8A8E] hover:text-white"
                     : "text-[#6B6B70] hover:text-[#0A0A0B]"
                 }`}
               >
                 {link.label}
+                {active === link.href && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
               </a>
             ))}
             <button
@@ -117,7 +144,9 @@ export default function Navbar() {
                     transition={{ delay: i * 0.06 }}
                     onClick={() => setMobileOpen(false)}
                     className={`text-2xl font-semibold transition-colors duration-200 ${
-                      theme === "dark"
+                      active === link.href
+                        ? "text-primary"
+                        : theme === "dark"
                         ? "text-[#8A8A8E] hover:text-white"
                         : "text-[#6B6B70] hover:text-[#0A0A0B]"
                     }`}

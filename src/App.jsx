@@ -13,6 +13,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ChatWidget from "./components/ChatWidget";
 import MusicPlayer from "./components/MusicPlayer";
+import BackToTop from "./components/BackToTop";
 import NotFound from "./components/NotFound";
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
       <Footer />
       <ChatWidget />
       <MusicPlayer />
+      <BackToTop />
     </div>
   );
 }
