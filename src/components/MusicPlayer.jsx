@@ -27,7 +27,7 @@ class LoFiEngine {
     this.ctx = new AudioCtx();
     this.master = this.ctx.createGain();
     this.master.gain.value = 0.0;
-    this.master.gain.linearRampToValueAtTime(0.28, this.ctx.currentTime + 2);
+    this.master.gain.linearRampToValueAtTime(0.34, this.ctx.currentTime + 2);
 
     const filter = this.ctx.createBiquadFilter();
     filter.type = "lowpass";
@@ -163,7 +163,7 @@ export default function MusicPlayer() {
     if (next) {
       engine.master.gain.linearRampToValueAtTime(0.0, t + 0.2);
     } else {
-      engine.master.gain.linearRampToValueAtTime(0.28, t + 0.5);
+      engine.master.gain.linearRampToValueAtTime(0.34, t + 0.5);
     }
     setMuted(next);
   };
