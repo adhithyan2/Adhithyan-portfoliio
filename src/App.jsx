@@ -13,8 +13,16 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ChatWidget from "./components/ChatWidget";
 import MusicPlayer from "./components/MusicPlayer";
+import NotFound from "./components/NotFound";
 
 export default function App() {
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isRoot = path === "/" || path === "/index.html";
+
+  if (!isRoot) {
+    return <NotFound />;
+  }
+
   return (
     <div className="min-h-screen">
       <ScrollProgress />
