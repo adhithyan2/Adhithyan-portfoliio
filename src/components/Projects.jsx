@@ -23,8 +23,10 @@ function ProjectCard({ project, index, onOpen }) {
     return (
       <TiltCard className="col-span-1 md:col-span-2 lg:col-span-3" maxTilt={4}>
         <motion.div
-          variants={fadeUp}
-          custom={index}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5, delay: (index - 3) * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
           onClick={() => onOpen(project)}
           className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
             theme === "dark"
@@ -97,8 +99,10 @@ function ProjectCard({ project, index, onOpen }) {
   return (
     <TiltCard maxTilt={6}>
       <motion.div
-        variants={fadeUp}
-        custom={index}
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.5, delay: (index - 3) * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
         onClick={() => onOpen(project)}
         className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
           theme === "dark"
@@ -352,13 +356,7 @@ export default function Projects() {
             ))}
           </motion.div>
 
-          <motion.div
-            key={filter}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+          <div key={filter} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleProjects.map((project, i) => (
               <ProjectCard
                 key={project.id}
@@ -368,7 +366,7 @@ export default function Projects() {
               />
             ))}
             {filter === "All" && <MoreProjectsTile />}
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 
