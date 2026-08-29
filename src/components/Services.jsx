@@ -6,6 +6,7 @@ import {
 import { services } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 const iconMap = {
   Globe, User, Layers, Rocket, LayoutDashboard,
@@ -29,7 +30,7 @@ export default function Services() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Services
+            <SectionLabel index="05">Services</SectionLabel>
           </motion.span>
 
           <motion.h2

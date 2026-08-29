@@ -5,6 +5,7 @@ import { projects } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import TiltCard from "./TiltCard";
+import SectionLabel from "./SectionLabel";
 
 function ProjectPlaceholder({ name, className = "" }) {
   const initials = name.replace(/[^a-zA-Z ]/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 2).toUpperCase();
@@ -318,7 +319,7 @@ export default function Projects() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Projects
+            <SectionLabel index="03">Projects</SectionLabel>
           </motion.span>
 
           <motion.h2

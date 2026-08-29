@@ -4,6 +4,7 @@ import { GitFork, Star, Database } from "lucide-react";
 import { openSourceProjects, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 const GH_USERNAME = "adhithyan2";
 
@@ -137,7 +138,7 @@ export default function GitHubSection() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Repositories
+            <SectionLabel index="07">Repositories</SectionLabel>
           </motion.span>
 
           <motion.h2

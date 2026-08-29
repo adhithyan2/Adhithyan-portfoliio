@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { skills } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 const skillGroups = [
   { key: "programming", label: "Programming" },
@@ -29,7 +30,7 @@ export default function Skills() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Skills & Tech
+            <SectionLabel index="02">Skills & Tech</SectionLabel>
           </motion.span>
 
           <motion.h2

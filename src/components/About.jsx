@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { profile } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 import TerminalCard from "./TerminalCard";
 
 export default function About() {
@@ -20,9 +21,9 @@ export default function About() {
         >
           <motion.span
             variants={fadeUp}
-            className="text-primary text-sm font-semibold tracking-widest uppercase"
+className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            About Me
+            <SectionLabel index="01">About</SectionLabel>
           </motion.span>
 
           <motion.h2

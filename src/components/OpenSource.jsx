@@ -4,6 +4,7 @@ import { Github, ExternalLink } from "lucide-react";
 import { socials, activityData } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 const GH_USERNAME = "adhithyan2";
 
@@ -97,7 +98,7 @@ export default function OpenSource() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Open Source
+            <SectionLabel index="06">Open Source</SectionLabel>
           </motion.span>
 
           <motion.h2

@@ -91,6 +91,31 @@ export default function Hero() {
             className="relative w-full lg:w-[45%] flex justify-center lg:justify-end lg:pb-0"
           >
             <div className="relative h-[320px] sm:h-[400px] md:h-[480px] lg:h-[600px] w-full flex justify-center lg:justify-end items-end">
+              {/* Animated aurora blobs (dark only) */}
+              {theme === "dark" && (
+                <>
+                  <div
+                    className="aurora-blob"
+                    style={{
+                      width: 420,
+                      height: 360,
+                      top: "2%",
+                      left: "-12%",
+                      background: "radial-gradient(circle, rgba(0,212,170,0.22) 0%, transparent 70%)",
+                    }}
+                  />
+                  <div
+                    className="aurora-blob"
+                    style={{
+                      width: 380,
+                      height: 340,
+                      bottom: "6%",
+                      right: "-8%",
+                      background: "radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%)",
+                    }}
+                  />
+                </>
+              )}
               {/* Subtle glow behind portrait */}
               <div
                 className={`absolute bottom-0 right-0 w-[300px] h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px] rounded-full ${

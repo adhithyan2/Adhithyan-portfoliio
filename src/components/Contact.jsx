@@ -4,6 +4,7 @@ import { Mail, Github, Linkedin, Send } from "lucide-react";
 import { socials, profile } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 export default function Contact() {
   const { theme } = useTheme();
@@ -49,7 +50,7 @@ export default function Contact() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Contact
+            <SectionLabel index="09">Contact</SectionLabel>
           </motion.span>
 
           <motion.h2

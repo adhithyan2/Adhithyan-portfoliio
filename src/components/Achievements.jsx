@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { achievements } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 function Counter({ value }) {
   const ref = useRef(null);
@@ -61,7 +62,7 @@ export default function Achievements() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Milestones
+            <SectionLabel index="08">Milestones</SectionLabel>
           </motion.span>
 
           <motion.h2

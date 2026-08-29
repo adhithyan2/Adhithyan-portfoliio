@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { timeline } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import SectionLabel from "./SectionLabel";
 
 export default function Timeline() {
   const { theme } = useTheme();
@@ -21,7 +22,7 @@ export default function Timeline() {
             variants={fadeUp}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
-            Journey
+            <SectionLabel index="04">Journey</SectionLabel>
           </motion.span>
 
           <motion.h2
