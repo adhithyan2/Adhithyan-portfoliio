@@ -1,13 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Loader2 } from "lucide-react";
-import { lyzr } from "../config/lyzr";
+import { lyzr, getSessionId } from "../config/lyzr";
 import { useTheme } from "../hooks/useTheme";
 
 const WELCOME = {
   role: "assistant",
   content: "Hi! I'm Adhithiyan's AI assistant. Ask me about his projects, skills, or anything about his work!",
 };
+
+const QUICK_REPLIES = [
+  "What projects have you built?",
+  "What are your technical skills?",
+  "Tell me about your background",
+  "How can I contact you?",
+];
 
 export default function ChatWidget() {
   const { theme } = useTheme();
@@ -35,7 +42,7 @@ export default function ChatWidget() {
         },
         body: JSON.stringify({
           message: text,
-          session_id: lyzr.sessionId,
+          session_id: getSessionId(),
         }),
       });
 
@@ -109,6 +116,24 @@ export default function ChatWidget() {
                   </div>
                 </div>
               ))}
+              {messages.length === 1 && !loading && (
+                <div className="flex flex-wrap gap-2 pb-1">
+                  {QUICK_REPLIES.map((q) => (
+                    <button
+                      key={q}
+                      type="button"
+                      onClick={() => sendMessage(q)}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                        theme === "dark"
+                          ? "bg-white/[0.04] border-white/[0.1] text-[#8A8A8E] hover:border-primary/50 hover:text-primary"
+                          : "bg-white border-black/[0.1] text-[#6B6B70] hover:border-primary/60 hover:text-primary"
+                      }`}
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              )}
               {loading && (
                 <div className="flex justify-start">
                   <div className={`px-3 py-2 rounded-2xl rounded-bl-md text-sm flex items-center gap-2 ${
