@@ -26,10 +26,10 @@ export default function BackToTop() {
           transition={{ duration: 0.25 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
-          className={`fixed bottom-6 left-5 md:left-6 z-[80] w-11 h-11 rounded-full flex items-center justify-center border transition-colors ${
+          className={`fixed bottom-6 left-5 md:left-6 z-[80] w-11 h-11 rounded-xl flex items-center justify-center border transition-colors ${
             theme === "dark"
-              ? "bg-[#111113]/80 backdrop-blur-md border-white/15 text-white hover:border-primary/50 hover:text-primary"
-              : "bg-white/90 backdrop-blur-md border-[#d2d2d2] text-[#1a1a1a] shadow-sm hover:border-primary/60 hover:text-primary"
+              ? "bg-[#111113]/80 backdrop-blur-md border-white/[0.1] text-white hover:border-primary/50 hover:text-primary"
+              : "bg-white/90 backdrop-blur-md border-black/[0.1] text-[#0A0A0B] shadow-sm hover:border-primary/60 hover:text-primary"
           }`}
         >
           <ArrowUp size={18} />

@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { timeline } from "../data/portfolioData";
+import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 export default function Timeline() {
+  const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
 
   return (
@@ -16,42 +18,59 @@ export default function Timeline() {
           variants={staggerContainer}
           className="max-w-3xl"
         >
-          <motion.span variants={fadeUp}>
+          <motion.span
+            variants={fadeUp}
+            className="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
             <SectionLabel index="04">Journey</SectionLabel>
           </motion.span>
 
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] mb-16"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
-            The path so far.
+            The Path So Far.
           </motion.h2>
 
-          <div>
-            {timeline.map((item, i) => (
-              <motion.div
-                key={item.stage}
-                variants={fadeUp}
-                custom={i + 2}
-                className="row-line group py-8 grid grid-cols-12 gap-4"
-              >
-                <span className="col-span-3 sm:col-span-2 eyebrow tabular-nums text-[#9a9a9a] pt-1">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="col-span-9 sm:col-span-10">
-                  <span className="eyebrow text-[11px] text-[#666] dark:text-[#9a9a9a]">
-                    {item.stage}
-                  </span>
-                  <h3 className="text-lg md:text-xl font-extrabold tracking-tight mt-1 mb-2 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm md:text-base leading-relaxed text-[#4e4e4e] dark:text-[#9a9a9a] max-w-xl">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+          <div className="relative">
+            <div className={`absolute left-[19px] top-2 bottom-2 w-px ${
+              theme === "dark" ? "bg-white/[0.08]" : "bg-black/[0.08]"
+            }`} />
+
+            <div className="space-y-12">
+              {timeline.map((item, i) => (
+                <motion.div
+                  key={item.stage}
+                  variants={fadeUp}
+                  custom={i + 2}
+                  className="flex gap-6"
+                >
+                  <div className="flex-shrink-0 relative">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xs font-bold ${
+                      theme === "dark"
+                        ? "bg-[#111113] border border-primary/30 text-primary"
+                        : "bg-white border border-primary/30 text-primary shadow-sm"
+                    }`}>
+                      {i + 1}
+                    </div>
+                  </div>
+                  <div className="pb-2">
+                    <span className="text-primary text-xs font-semibold tracking-widest uppercase">
+                      {item.stage}
+                    </span>
+                    <h3 className="text-lg font-bold mt-1 mb-2 tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className={`text-sm leading-relaxed ${
+                      theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+                    }`}>
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

@@ -34,7 +34,7 @@ function ContributionGraph() {
         if (cancelled || !data?.contributions) return;
         const weeks = data.contributions;
         const flat = weeks.flatMap((w) => w);
-        const recent = flat.slice(-91);
+        const recent = flat.slice(-91); // ~13 weeks, fits layout
         if (recent.length > 0) {
           setCells(recent.map((item) => ({ level: getLevel(item.count || 0), count: item.count || 0 })));
           setSource("live");
@@ -70,7 +70,9 @@ function ContributionGraph() {
           ))}
         </div>
       </div>
-      <p className="eyebrow text-[10px] mt-3 text-[#9a9a9a]">
+      <p className={`text-xs mt-3 ${
+        theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+      }`}>
         {source === "live"
           ? "Live contribution data from GitHub."
           : "Live GitHub data not reachable right now — showing placeholder activity."}
@@ -80,6 +82,7 @@ function ContributionGraph() {
 }
 
 export default function OpenSource() {
+  const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
 
   return (
@@ -91,39 +94,68 @@ export default function OpenSource() {
           animate={controls}
           variants={staggerContainer}
         >
-          <motion.span variants={fadeUp}>
+          <motion.span
+            variants={fadeUp}
+            className="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
             <SectionLabel index="06">Open Source</SectionLabel>
           </motion.span>
 
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 tracking-tight"
           >
-            Building in public.<br />
-            Building for everyone.
+            Building in Public.<br />
+            Building for Everyone.
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
             custom={2}
-            className="text-base md:text-lg mb-12 max-w-2xl leading-relaxed text-[#4e4e4e] dark:text-[#9a9a9a]"
+            className={`text-base md:text-lg mb-12 max-w-2xl leading-relaxed ${
+              theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+            }`}
           >
             I believe software becomes more powerful when knowledge, tools, and ideas are shared. I am working toward building useful open-source projects and a freelancer-oriented ecosystem that makes it easier to turn ideas into real digital products.
           </motion.p>
 
-          <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4 mb-16">
-            <a href={socials.github} target="_blank" rel="noopener noreferrer" className="pill pill-solid px-6 py-3">
-              <Github size={16} /> GitHub Profile
+          <motion.div
+            variants={fadeUp}
+            custom={3}
+            className="flex flex-wrap gap-4 mb-16"
+          >
+            <a
+              href={socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+            >
+              <Github size={18} /> GitHub Profile
             </a>
-            <a href="#" className="pill pill-outline px-6 py-3">
-              <ExternalLink size={16} /> Open Source Projects
+            <a
+              href="#"
+              className={`inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm rounded-xl border transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] ${
+                theme === "dark"
+                  ? "border-white/15 text-white hover:bg-white/5"
+                  : "border-black/15 text-[#0A0A0B] hover:bg-black/5"
+              }`}
+            >
+              <ExternalLink size={18} /> Open Source Projects
             </a>
           </motion.div>
 
           <motion.div variants={fadeUp} custom={4}>
-            <h3 className="eyebrow text-[#666] dark:text-[#9a9a9a] mb-5">Activity</h3>
-            <div className="card-line p-6">
+            <h3 className={`text-sm font-semibold tracking-widest uppercase mb-4 ${
+              theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+            }`}>
+              Activity
+            </h3>
+            <div className={`rounded-2xl p-6 ${
+              theme === "dark"
+                ? "bg-[#111113] border border-white/[0.06]"
+                : "bg-white border border-black/[0.06] shadow-sm"
+            }`}>
               <ContributionGraph />
             </div>
           </motion.div>

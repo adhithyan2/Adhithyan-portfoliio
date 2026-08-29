@@ -11,8 +11,7 @@ export default {
         primary: "rgb(var(--primary) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["Fragment Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },

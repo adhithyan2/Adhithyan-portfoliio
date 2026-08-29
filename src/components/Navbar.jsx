@@ -42,13 +42,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  const linkClass = (href) =>
-    `eyebrow text-[11px] relative transition-colors duration-200 ${
-      active === href
-        ? "text-primary"
-        : "text-[#666] dark:text-[#8A8A8E] hover:text-[#1a1a1a] dark:hover:text-white"
-    }`;
-
   return (
     <>
       <motion.nav
@@ -57,23 +50,38 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/85 dark:bg-[#0A0A0B]/85 backdrop-blur-xl border-b border-[#d2d2d2] dark:border-white/[0.08]"
+            ? theme === "dark"
+              ? "bg-[#0A0A0B]/80 backdrop-blur-xl border-b border-white/[0.06]"
+              : "bg-white/80 backdrop-blur-xl border-b border-black/[0.06]"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-[1320px] mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#home" className="eyebrow text-[13px] tracking-[0.2em] text-[#1a1a1a] dark:text-white">
-            Adhithiyan<span className="text-primary">.</span>
+          <a
+            href="#home"
+            className="text-lg font-bold tracking-tight text-primary"
+          >
+            AP
           </a>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className={linkClass(link.href)}>
+              <a
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors duration-200 relative ${
+                  active === link.href
+                    ? "text-primary"
+                    : theme === "dark"
+                    ? "text-[#8A8A8E] hover:text-white"
+                    : "text-[#6B6B70] hover:text-[#0A0A0B]"
+                }`}
+              >
                 {link.label}
                 {active === link.href && (
                   <motion.span
-                    layoutId="nav-underline"
-                    className="absolute -bottom-1.5 left-0 right-0 h-px bg-primary origin-left"
+                    layoutId="nav-pill"
+                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -81,24 +89,24 @@ export default function Navbar() {
             ))}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-[#d2d2d2] dark:border-white/15 transition-colors duration-200 hover:border-primary/60 hover:text-primary"
+              className="p-2 rounded-lg transition-colors duration-200 hover:bg-white/10"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
 
           <div className="flex md:hidden items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-[#d2d2d2] dark:border-white/15"
+              className="p-2 rounded-lg transition-colors duration-200"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
               onClick={() => setMobileOpen(true)}
-              className="p-2 rounded-md"
+              className="p-2 rounded-lg transition-colors duration-200"
               aria-label="Open menu"
             >
               <Menu size={22} />
@@ -114,14 +122,14 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className={`fixed inset-0 z-[100] backdrop-blur-xl ${
-              theme === "dark" ? "bg-[#0A0A0B]/95" : "bg-white/95"
+            className={`fixed inset-0 z-[100] ${
+              theme === "dark" ? "bg-[#0A0A0B]/95 backdrop-blur-xl" : "bg-white/95 backdrop-blur-xl"
             }`}
           >
             <div className="flex flex-col items-center justify-center h-full relative">
               <button
                 onClick={() => setMobileOpen(false)}
-                className="absolute top-5 right-6 p-2"
+                className="absolute top-5 right-6 p-2 rounded-lg transition-colors duration-200"
                 aria-label="Close menu"
               >
                 <X size={24} />
@@ -135,10 +143,12 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.06 }}
                     onClick={() => setMobileOpen(false)}
-                    className={`font-semibold text-2xl transition-colors duration-200 ${
+                    className={`text-2xl font-semibold transition-colors duration-200 ${
                       active === link.href
                         ? "text-primary"
-                        : "text-[#4e4e4e] dark:text-[#9a9a9a]"
+                        : theme === "dark"
+                        ? "text-[#8A8A8E] hover:text-white"
+                        : "text-[#6B6B70] hover:text-[#0A0A0B]"
                     }`}
                   >
                     {link.label}

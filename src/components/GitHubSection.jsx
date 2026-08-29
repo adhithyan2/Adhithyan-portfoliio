@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Star, GitFork, ArrowUpRight, Database } from "lucide-react";
+import { GitFork, Star, Database } from "lucide-react";
 import { openSourceProjects, socials } from "../data/portfolioData";
-import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
+import { useTheme } from "../hooks/useTheme";
+import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 const GH_USERNAME = "adhithyan2";
@@ -28,15 +29,15 @@ const LANG_COLORS = {
   Kotlin: "#A97BFF",
 };
 
-function LanguageBars({ languages }) {
+function LanguageBars({ languages, theme }) {
   const entries = Object.entries(languages).sort((a, b) => b[1] - a[1]);
   const total = entries.reduce((sum, [, bytes]) => sum + bytes, 0);
 
   return (
-    <div className="mt-4">
+    <div className="mb-6">
       <div
-        className="h-1 w-full overflow-hidden flex rounded-full"
-        style={{ background: "rgba(128,128,128,0.15)" }}
+        className="h-1.5 w-full rounded-full overflow-hidden flex"
+        style={{ background: theme === "dark" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.1)" }}
       >
         {entries.map(([lang, bytes]) => (
           <span
@@ -48,14 +49,16 @@ function LanguageBars({ languages }) {
           />
         ))}
       </div>
-      <div className="flex flex-wrap gap-x-3.5 gap-y-1 mt-2">
+      <div className="flex flex-wrap gap-x-3.5 gap-y-1.5 mt-2.5">
         {entries.map(([lang, bytes]) => (
-          <span key={lang} className="eyebrow text-[10px] flex items-center gap-1.5 text-[#9a9a9a]">
+          <span key={lang} className="flex items-center gap-1.5 text-xs">
             <span
               className="w-2 h-2 rounded-full"
               style={{ background: LANG_COLORS[lang] || "#8B5CF6" }}
             />
-            {lang} {Math.round((bytes / total) * 100)}%
+            <span className={theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}>
+              {lang} {Math.round((bytes / total) * 100)}%
+            </span>
           </span>
         ))}
       </div>
@@ -64,6 +67,7 @@ function LanguageBars({ languages }) {
 }
 
 export default function GitHubSection() {
+  const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
   const [repos, setRepos] = useState(null);
   const [error, setError] = useState(false);
@@ -78,6 +82,7 @@ export default function GitHubSection() {
       stars: repo.stargazers_count ?? 0,
       forks: repo.forks_count ?? 0,
       url: repo.html_url || socials.github,
+      updated: repo.updated_at,
       languages: repo._languages || null,
     });
 
@@ -121,7 +126,7 @@ export default function GitHubSection() {
   const reposToShow = repos || openSourceProjects;
 
   return (
-    <section id="repositories" className="py-24 md:py-32 bg-[#FAFAFA] dark:bg-[#0C0C0E]">
+    <section className="py-24 md:py-32">
       <div className="max-w-[1320px] mx-auto px-6">
         <motion.div
           ref={ref}
@@ -129,64 +134,63 @@ export default function GitHubSection() {
           animate={controls}
           variants={staggerContainer}
         >
-          <motion.span variants={fadeUp}>
+          <motion.span
+            variants={fadeUp}
+            className="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
             <SectionLabel index="07">Repositories</SectionLabel>
           </motion.span>
 
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
-            {repos ? "Live from GitHub." : "Featured repositories."}
+            {repos ? "Live From GitHub." : "Featured Repos."}
           </motion.h2>
 
-          <motion.p
-            variants={fadeUp}
-            custom={2}
-            className="text-base md:text-lg mb-16 max-w-2xl leading-relaxed text-[#4e4e4e] dark:text-[#9a9a9a]"
-          >
-            Open-source work and experiments — built in public, shipped for real users.
-          </motion.p>
-
-          <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {reposToShow.map((repo, i) => (
               <motion.a
                 key={repo.name}
                 href={repo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                variants={fadeUp}
-                custom={i + 3}
-                className="row-line hover-band group block grid grid-cols-12 gap-4 py-6"
+                variants={scaleIn}
+                custom={i + 2}
+                className={`group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
+                  theme === "dark"
+                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30"
+                    : "bg-white border border-black/[0.06] shadow-sm hover:shadow-md hover:border-primary/30"
+                }`}
               >
-                <span className="col-span-2 md:col-span-1 eyebrow tabular-nums text-[#9a9a9a] pt-1">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="col-span-10 md:col-span-11">
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                    <h3 className="text-base md:text-lg font-extrabold tracking-tight group-hover:text-primary transition-colors">
-                      {repo.name}
-                    </h3>
-                    <span className="pill-outline eyebrow text-[10px] px-2.5 py-0.5">
-                      {repo.language}
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed text-[#4e4e4e] dark:text-[#9a9a9a] mt-1 max-w-2xl">
-                    {repo.description || "No description provided yet."}
-                  </p>
-                  {repo.languages && <LanguageBars languages={repo.languages} />}
-                  <div className="flex items-center gap-4 mt-3">
-                    <span className="eyebrow text-[11px] tabular-nums text-[#9a9a9a] flex items-center gap-1.5">
-                      <Star size={13} /> {repo.stars}
-                    </span>
-                    <span className="eyebrow text-[11px] tabular-nums text-[#9a9a9a] flex items-center gap-1.5">
-                      <GitFork size={13} /> {repo.forks}
-                    </span>
-                    <span className="ml-auto eyebrow text-[11px] text-[#666] dark:text-[#9a9a9a] flex items-center gap-1 group-hover:text-primary transition-colors">
-                      View <ArrowUpRight size={13} />
-                    </span>
-                  </div>
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-base font-bold tracking-tight group-hover:text-primary transition-colors">
+                    {repo.name}
+                  </h3>
+                  <span className={`text-xs px-2 py-0.5 rounded-md font-medium ${
+                    theme === "dark"
+                      ? "bg-white/[0.06] text-[#8A8A8E]"
+                      : "bg-black/[0.04] text-[#6B6B70]"
+                  }`}>
+                    {repo.language}
+                  </span>
+                </div>
+                <p className={`text-sm mb-6 leading-relaxed ${
+                  theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+                }`}>
+                  {repo.description || "No description provided yet."}
+                </p>
+                {repo.languages && <LanguageBars languages={repo.languages} theme={theme} />}
+                <div className={`flex items-center gap-4 text-xs ${
+                  theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+                }`}>
+                  <span className="flex items-center gap-1">
+                    <Star size={14} /> {repo.stars}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <GitFork size={14} /> {repo.forks}
+                  </span>
                 </div>
               </motion.a>
             ))}
@@ -195,8 +199,10 @@ export default function GitHubSection() {
           {error && (
             <motion.p
               variants={fadeUp}
-              custom={8}
-              className="eyebrow text-[11px] mt-6 flex items-center gap-2 text-[#9a9a9a]"
+              custom={6}
+              className={`mt-6 flex items-center gap-2 text-xs ${
+                theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+              }`}
             >
               <Database size={14} /> Couldn't reach GitHub API — showing placeholders. The repos load live on most visitors' devices.
             </motion.p>
