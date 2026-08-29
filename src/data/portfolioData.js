@@ -39,6 +39,7 @@ export const projects = [
     id: "queuebook",
     name: "QueueBook",
     category: "Full-Stack Web Application",
+    filter: "Full-Stack",
     tagline: "An appointment and queue management platform that eliminates physical waiting.",
     description:
       "An appointment and queue management platform that helps users book services, track live queue status, estimate waiting time, and manage appointments without physically waiting in line.",
@@ -63,6 +64,7 @@ export const projects = [
     id: "namma-uzhavan",
     name: "Namma Uzhavan",
     category: "Smart Agriculture / Real-World Problem Solving",
+    filter: "Full-Stack",
     tagline: "Technology-driven solutions for farmers.",
     description:
       "An agriculture-focused digital platform designed to provide useful technology-driven solutions for farmers and improve access to agricultural information and services.",
@@ -83,6 +85,7 @@ export const projects = [
     id: "fac",
     name: "FAC — Facial Attendance Checker",
     category: "AI / Computer Vision",
+    filter: "AI",
     tagline: "Automate attendance with facial recognition.",
     description:
       "A facial recognition based attendance system designed to automate attendance management using computer vision.",
@@ -103,6 +106,7 @@ export const projects = [
     id: "ai-meeting-buddy",
     name: "AI Meeting Buddy",
     category: "Artificial Intelligence",
+    filter: "AI",
     tagline: "Your AI-powered meeting productivity assistant.",
     description:
       "An AI-powered productivity concept designed to assist users during meetings by helping capture, organize, and process important meeting information.",
@@ -123,6 +127,7 @@ export const projects = [
     id: "templatemind",
     name: "TemplateMind AI",
     category: "AI / Document Technology",
+    filter: "AI",
     tagline: "Edit the content. Keep the design.",
     description:
       "An AI-powered document editing and generation concept focused on modifying PDF content while preserving the original document's fonts, alignment, colors, tables, headers, footers, and overall layout.",
@@ -143,6 +148,7 @@ export const projects = [
     id: "smart-traffic",
     name: "Smart Traffic Management System",
     category: "Smart City / AI",
+    filter: "AI",
     tagline: "Intelligent traffic flow for smarter cities.",
     description:
       "A smart traffic management project concept focused on using technology and intelligent systems to improve traffic flow and urban transportation.",

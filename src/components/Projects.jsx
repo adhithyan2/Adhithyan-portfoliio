@@ -296,8 +296,14 @@ function MoreProjectsTile() {
 }
 
 export default function Projects() {
+  const { theme } = useTheme();
   const [selected, setSelected] = useState(null);
+  const [filter, setFilter] = useState("All");
   const { ref, controls } = useScrollReveal();
+
+  const filters = ["All", "Full-Stack", "AI"];
+  const visibleProjects =
+    filter === "All" ? projects : projects.filter((p) => p.filter === filter);
 
   return (
     <section id="projects" className="py-24 md:py-32">
@@ -318,22 +324,50 @@ export default function Projects() {
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-10 tracking-tight"
           >
             Things I've Built.
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, i) => (
+          <motion.div
+            variants={fadeUp}
+            custom={2}
+            className="flex flex-wrap items-center gap-2 mb-14"
+          >
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-200 ${
+                  filter === f
+                    ? "bg-primary text-[#0A0A0B] shadow-[0_4px_20px_rgba(0,212,170,0.25)]"
+                    : theme === "dark"
+                    ? "bg-white/[0.06] text-[#8A8A8E] hover:bg-white/[0.1] hover:text-white"
+                    : "bg-black/[0.04] text-[#6B6B70] hover:bg-black/[0.08] hover:text-[#0A0A0B]"
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </motion.div>
+
+          <motion.div
+            key={filter}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {visibleProjects.map((project, i) => (
               <ProjectCard
                 key={project.id}
                 project={project}
-                index={i + 2}
+                index={i + 3}
                 onOpen={setSelected}
               />
             ))}
-            <MoreProjectsTile />
-          </div>
+            {filter === "All" && <MoreProjectsTile />}
+          </motion.div>
         </motion.div>
       </div>
 
