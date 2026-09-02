@@ -3,18 +3,8 @@ import { ArrowDown, Github, MessageCircle } from "lucide-react";
 import { profile, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 
-function makeWhatsAppLink(text) {
-  const number = socials.whatsapp;
-  if (!number) return `mailto:${socials.email}?subject=Website%20enquiry`;
-  return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
-}
-
 export default function Hero() {
   const { theme } = useTheme();
-
-  const whatsappLink = makeWhatsAppLink(
-    "Hi Adhithiyan! I'd like a website for my business. Can we talk?"
-  );
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
@@ -72,13 +62,11 @@ export default function Hero() {
                 <ArrowDown size={16} />
               </a>
               <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${socials.email}?subject=${encodeURIComponent("Website enquiry")}`}
                 className="inline-flex items-center gap-2 px-7 py-3.5 font-semibold text-sm rounded-xl bg-[#25D366] text-white transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
               >
                 <MessageCircle size={18} />
-                Chat on WhatsApp
+                Send a Message
               </a>
               <a
                 href="#contact"

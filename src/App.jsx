@@ -16,7 +16,6 @@ import ChatWidget from "./components/ChatWidget";
 import MusicPlayer from "./components/MusicPlayer";
 import BackToTop from "./components/BackToTop";
 import NotFound from "./components/NotFound";
-import WhatsAppButton from "./components/WhatsAppButton";
 
 export default function App() {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -47,7 +46,6 @@ export default function App() {
       <Footer />
       <ChatWidget />
       <MusicPlayer />
-      <WhatsAppButton />
       <BackToTop />
     </div>
   );

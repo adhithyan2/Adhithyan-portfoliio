@@ -21,7 +21,8 @@ export const socials = {
   github: "https://github.com/adhithyan2",
   linkedin: "https://www.linkedin.com/in/adhithyan-prabaharan-bb9632318",
   email: "adhithiyanprabaharan@gmail.com",
-  // Fill with real number — 10-digit WhatsApp number with country code, digits only.
+  // Security: personal WhatsApp number intentionally NOT exposed publicly.
+  // Visitors reach via email/contact form. Keep empty.
   whatsapp: "",
   phone: "",
 };
