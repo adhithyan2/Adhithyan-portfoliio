@@ -253,9 +253,12 @@ export const achievements = [
 ];
 
 export const openSourceProjects = [
-  { name: "queuebook-core", description: "Core engine for the QueueBook appointment & queue management system", stars: 0, forks: 0, language: "JavaScript", url: "#" },
-  { name: "template-mind", description: "AI-powered PDF content editing while preserving layout", stars: 0, forks: 0, language: "Python", url: "#" },
-  { name: "fac-toolkit", description: "Facial recognition attendance toolkit — plug-and-play", stars: 0, forks: 0, language: "Python", url: "#" },
+  { name: "queuebook", description: "Appointment & queue management system — book online, track live queue status, reduce wait times.", stars: 0, forks: 0, language: "JavaScript", url: "https://github.com/adhithyan2/queuebook" },
+  { name: "TemplateMind-AI", description: "AI-powered PDF content editing that preserves fonts, alignment, tables and layout.", stars: 0, forks: 0, language: "Python", url: "https://github.com/adhithyan2/TemplateMind-AI" },
+  { name: "namma-uzhavan", description: "Technology-driven digital platform with agricultural information and services for farmers.", stars: 0, forks: 0, language: "HTML", url: "https://github.com/adhithyan2/namma-uzhavan" },
+  { name: "Agroshield", description: "Smart agriculture project focused on real-world farming challenges.", stars: 0, forks: 0, language: "HTML", url: "https://github.com/adhithyan2/Agroshield" },
+  { name: "AI-Meeting-Buddy", description: "AI assistant that captures, organizes and processes meeting information.", stars: 0, forks: 0, language: "Python", url: "https://github.com/adhithyan2/AI-Meeting-Buddy." },
+  { name: "Adhithyan-portfoliio", description: "This very portfolio — a React + Vite site with a custom AI chat assistant.", stars: 0, forks: 0, language: "JavaScript", url: "https://github.com/adhithyan2/Adhithyan-portfoliio" },
 ];
 
 export const activityData = [

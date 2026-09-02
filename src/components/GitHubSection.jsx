@@ -69,7 +69,9 @@ function LanguageBars({ languages, theme }) {
 export default function GitHubSection() {
   const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
-  const [repos, setRepos] = useState(null);
+  // Start with the reliable static list so the section is never blank.
+  const [repos, setRepos] = useState(openSourceProjects);
+  const [live, setLive] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -81,7 +83,7 @@ export default function GitHubSection() {
       language: repo.language || "—",
       stars: repo.stargazers_count ?? 0,
       forks: repo.forks_count ?? 0,
-      url: repo.html_url || socials.github,
+      url: repo.html_url || "",
       updated: repo.updated_at,
       languages: repo._languages || null,
     });
@@ -114,6 +116,7 @@ export default function GitHubSection() {
             return normalize({ ...repo, _languages: langs });
           })
         );
+        setLive(true);
       })
       .catch(() => {
         if (!cancelled) setError(true);
@@ -122,8 +125,6 @@ export default function GitHubSection() {
       cancelled = true;
     };
   }, []);
-
-  const reposToShow = repos || openSourceProjects;
 
   return (
     <section className="py-24 md:py-32">
@@ -146,14 +147,14 @@ export default function GitHubSection() {
             custom={1}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
-            {repos ? "Live From GitHub." : "Featured Repos."}
+            {live ? "Live From GitHub." : "Featured Repos."}
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reposToShow.map((repo, i) => (
+            {repos.map((repo, i) => (
               <motion.a
-                key={repo.name}
-                href={repo.url}
+                key={repo.name + repo.description}
+                href={repo.url || socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={scaleIn}
@@ -176,7 +177,7 @@ export default function GitHubSection() {
                     {repo.language}
                   </span>
                 </div>
-                <p className={`text-sm mb-6 leading-relaxed ${
+                <p className={`text-sm mb-6 leading-relaxed flex-1 ${
                   theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
                 }`}>
                   {repo.description || "No description provided yet."}
@@ -199,12 +200,12 @@ export default function GitHubSection() {
           {error && (
             <motion.p
               variants={fadeUp}
-              custom={6}
+              custom={8}
               className={`mt-6 flex items-center gap-2 text-xs ${
                 theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
               }`}
             >
-              <Database size={14} /> Couldn't reach GitHub API — showing placeholders. The repos load live on most visitors' devices.
+              <Database size={14} /> Couldn't reach the GitHub API live data — showing your featured repos instead.
             </motion.p>
           )}
         </motion.div>
