@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
-import { services, servicePricing, socials } from "../data/portfolioData";
+import { MessageCircle } from "lucide-react";
+import { services, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
@@ -19,6 +19,12 @@ export default function Services() {
   const { ref, controls } = useScrollReveal();
 
   const visibleServices = services.filter((s) => s.shown);
+
+  const ctaLink = socials.whatsapp
+    ? `https://wa.me/${socials.whatsapp}?text=${encodeURIComponent(
+        "Hi Adhithiyan! I'd like to talk about getting help for my business. Can we discuss?"
+      )}`
+    : `mailto:${socials.email}?subject=${encodeURIComponent("Website / Business enquiry")}`;
 
   return (
     <section id="services" className="py-24 md:py-32">
@@ -76,66 +82,41 @@ export default function Services() {
             ))}
           </div>
 
-          {/* Pricing */}
-          <motion.div variants={fadeUp} custom={4} className="mt-20">
-            <h3 className="text-2xl md:text-3xl font-bold mb-2 tracking-tight text-center">
-              Simple, Fair Pricing
+          {/* CTA banner - no scary prices, just an easy conversation start */}
+          <motion.div
+            variants={fadeUp}
+            custom={4}
+            className={`mt-16 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden ${
+              theme === "dark"
+                ? "bg-[#111113] border border-white/[0.08]"
+                : "bg-white border border-black/[0.08]"
+            }`}
+          >
+            <div
+              className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[80px]"
+              style={{
+                background:
+                  theme === "dark"
+                    ? "radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 70%)"
+                    : "radial-gradient(circle, rgba(11,122,92,0.1) 0%, transparent 70%)",
+              }}
+            />
+            <h3 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">
+              Not Sure What You Need?
             </h3>
-            <p className={`text-center max-w-xl mx-auto mb-12 ${theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}`}>
-              Transparent pricing, no hidden fees. Every package starts with a free, no-obligation consultation.
+            <p className={`max-w-xl mx-auto mb-8 ${theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}`}>
+              Tell me about your business. I'll give you a clear, no-pressure plan and a fair quote — always free, always in
+              simple language.
             </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {servicePricing.map((plan) => (
-                <motion.div
-                  key={plan.plan}
-                  variants={scaleIn}
-                  custom={5}
-                  className={`rounded-2xl p-7 flex flex-col relative ${
-                    plan.popular
-                      ? theme === "dark"
-                        ? "bg-[#111113] border-2 border-primary/60 shadow-[0_8px_40px_rgba(0,212,170,0.1)]"
-                        : "bg-white border-2 border-primary shadow-xl"
-                      : theme === "dark"
-                      ? "bg-[#111113] border border-white/[0.08]"
-                      : "bg-white border border-black/[0.08]"
-                  }`}
-                >
-                  {plan.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full bg-primary text-[#0A0A0B]">
-                      Most Popular
-                    </span>
-                  )}
-                  <h3 className="text-lg font-bold mb-1">{plan.plan}</h3>
-                  <p className={`text-xs mb-3 ${theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}`}>
-                    {plan.audience}
-                  </p>
-                  <div className="text-2xl font-bold text-primary mb-5">{plan.price}</div>
-                  <ul className="space-y-2.5 mb-8 flex-1">
-                    {plan.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-sm">
-                        <Check size={16} className="text-primary mt-0.5 shrink-0" />
-                        <span className={theme === "dark" ? "text-[#c9c9cc]" : "text-[#3d3d3d]"}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={socials.whatsapp ? `https://wa.me/${socials.whatsapp}?text=${encodeURIComponent("Hi! I'm interested in the " + plan.plan + " package.")}` : `mailto:${socials.email}?subject=${encodeURIComponent("Enquiry: " + plan.plan)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] ${
-                      plan.popular
-                        ? "bg-primary text-[#0A0A0B]"
-                        : theme === "dark"
-                        ? "border border-white/15 text-white hover:bg-white/5"
-                        : "border border-black/15 text-[#0A0A0B] hover:bg-black/5"
-                    }`}
-                  >
-                    Get This Package
-                  </a>
-                </motion.div>
-              ))}
-            </div>
+            <a
+              href={ctaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+            >
+              <MessageCircle size={18} />
+              Get a Free Quote — No Pressure
+            </a>
           </motion.div>
         </motion.div>
       </div>

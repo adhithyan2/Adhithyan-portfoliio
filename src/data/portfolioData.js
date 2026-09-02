@@ -244,47 +244,6 @@ export const services = [
   { title: "API Integration", description: "Connecting third-party services and building RESTful APIs to power your applications.", icon: "Plug", shown: false },
 ];
 
-export const servicePricing = [
-  {
-    plan: "Starter Website",
-    audience: "Shops, clinics, salons, restaurants, tutors",
-    price: "from ₹6,000",
-    features: [
-      "Mobile-friendly website (up to 5 pages)",
-      "Contact / enquiry form",
-      "WhatsApp + Google Maps integration",
-      "Fast loading, SEO-ready",
-      "Delivered in 1 week",
-    ],
-    popular: false,
-  },
-  {
-    plan: "Business + Booking",
-    audience: "Businesses that take appointments or orders",
-    price: "from ₹12,000",
-    features: [
-      "Everything in Starter",
-      "Online booking / appointment system",
-      "Order or quote forms",
-      "Admin dashboard",
-      "Delivered in 2 weeks",
-    ],
-    popular: true,
-  },
-  {
-    plan: "Custom / App",
-    audience: "Businesses needing a tailored tool",
-    price: "Let's talk",
-    features: [
-      "Tailor-made web app / dashboard",
-      "AI features where useful",
-      "Ongoing support & maintenance",
-      "Delivered in 3-4 weeks",
-    ],
-    popular: false,
-  },
-];
-
 export const achievements = [
   { label: "Projects Built", value: "6+" },
   { label: "Full-Stack Development", value: "✓" },
