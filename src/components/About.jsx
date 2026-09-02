@@ -3,7 +3,6 @@ import { profile } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
-import TerminalCard from "./TerminalCard";
 
 export default function About() {
   const { theme } = useTheme();
@@ -19,10 +18,7 @@ export default function About() {
           variants={staggerContainer}
           className="max-w-3xl"
         >
-          <motion.span
-            variants={fadeUp}
-className="text-primary text-sm font-semibold tracking-widest uppercase"
-          >
+          <motion.span variants={fadeUp} className="text-primary text-sm font-semibold tracking-widest uppercase">
             <SectionLabel index="01">About</SectionLabel>
           </motion.span>
 
@@ -31,8 +27,9 @@ className="text-primary text-sm font-semibold tracking-widest uppercase"
             custom={1}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-8 tracking-tight"
           >
-            Turning Ideas Into<br />
-            <span className="text-primary">Working Products.</span>
+            I Build Websites That
+            <br />
+            <span className="text-primary">Grow Local Businesses.</span>
           </motion.h2>
 
           <motion.div
@@ -43,20 +40,26 @@ className="text-primary text-sm font-semibold tracking-widest uppercase"
             }`}
           >
             <p>
-              I'm <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>{profile.name}</strong>, a {profile.education}. I believe in building software that solves real problems rather than just learning technology for its own sake.
+              I'm <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>{profile.name}</strong>, a
+              full-stack developer with a simple belief:{" "}
+              <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>
+                your business should be found online and take bookings while you sleep.
+              </strong>
             </p>
             <p>
-              My work spans <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>full-stack web development</strong> — from crafting responsive frontends with React and Tailwind CSS to designing robust backends with Node.js, Express, and MongoDB. I've built AI-powered applications, facial recognition systems, and intelligent automation tools.
+              Whether you run a <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>salon, clinic, restaurant, shop or coaching class</strong>,
+              I build mobile-friendly websites, online booking systems and smart tools that turn visitors into
+              customers — in plain language, without confusing tech talk.
             </p>
             <p>
-              What drives me is the intersection of <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>technology and real-world impact</strong>. I'm working toward building an open-source freelancer ecosystem that makes it easier for developers to turn ideas into real digital products — tools that actual businesses and users can benefit from.
+              I've built booking and queue systems, appointment platforms, AI tools and dashboards. Everything is
+              designed to <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>be fast, work on any phone, and be simple for you to manage</strong>.
             </p>
             <p>
-              I'm a product-focused builder who values clean code, thoughtful design, and the discipline of continuous learning. Every project I take on is a chance to get better at the craft.
+              I work with local businesses across India, respond quickly on WhatsApp, and deliver in days — not months.
+              And the <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>first consultation is always free</strong>.
             </p>
           </motion.div>
-
-          <TerminalCard />
         </motion.div>
       </div>
     </section>

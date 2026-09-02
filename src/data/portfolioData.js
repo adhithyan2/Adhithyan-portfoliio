@@ -1,18 +1,29 @@
 export const profile = {
   name: "Adhithiyan Prabaharan",
   role: "Full-Stack Developer",
+  // Hero headline is now a client-first value prop.
+  headlineA: "Get a Website That",
+  headlineB: "Brings You More",
+  headlineAccent: "Customers.",
   tagline: "Building Digital Products That Solve Real Problems.",
-  subtitle: "CSBS Student • Full-Stack Developer • AI Enthusiast • Open-Source Builder",
+  // Client-first sub-line (plain language, for small businesses).
+  subtitle:
+    "I build fast, mobile-friendly websites, booking systems and smart tools for shops, clinics, salons, restaurants and service businesses — so you get found online and booked more.",
   education: "B.Tech Computer Science and Business Systems (CSBS), Jansons Institute of Technology",
   location: "India",
   resumeUrl: "#",
   avatarUrl: "/assets/profile.png",
+  // Availability signal for freelancing.
+  availability: "Currently accepting new projects",
 };
 
 export const socials = {
   github: "https://github.com/adhithyan2",
   linkedin: "https://www.linkedin.com/in/adhithyan-prabaharan-bb9632318",
   email: "adhithiyanprabaharan@gmail.com",
+  // Fill with real number — 10-digit WhatsApp number with country code, digits only.
+  whatsapp: "",
+  phone: "",
 };
 
 export const navLinks = [
@@ -59,6 +70,16 @@ export const projects = [
     liveUrl: "PLACEHOLDER_LIVE_DEMO",
     image: "/assets/projects/queuebook.png",
     featured: true,
+    // Client-first case-study framing (local businesses)
+    problem:
+      "Customers were walking into busy salons and clinics with no way to book ahead, so they'd either wait long or leave — and businesses lost walk-ins every day.",
+    solution:
+      "An appointment + queue management system with a simple booking page, live queue status, and auto-reminders via WhatsApp/SMS.",
+    result: "Customers can book in seconds. Staff see the full day at a glance. No more lost walk-ins.",
+    metrics: [
+      { value: "100%", label: "Online booking" },
+      { value: "0", label: "Lost walk-ins" },
+    ],
   },
   {
     id: "namma-uzhavan",
@@ -80,6 +101,15 @@ export const projects = [
     liveUrl: "PLACEHOLDER_LIVE_DEMO",
     image: "/assets/projects/namma-uzhavan.png",
     featured: false,
+    problem:
+      "Farmers and local agro-suppliers had no easy way to find market prices, weather info or the right services — everything was scattered and word-of-mouth.",
+    solution:
+      "A mobile-friendly platform combining market price data, weather updates and a local service directory in one place.",
+    result: "Farmers get the info they need in one tap, in their own language.",
+    metrics: [
+      { value: "1", label: "Place for everything" },
+      { value: "24/7", label: "Access on any phone" },
+    ],
   },
   {
     id: "fac",
@@ -201,16 +231,58 @@ export const timeline = [
 ];
 
 export const services = [
-  { title: "Business Websites", description: "Professional, fast-loading websites tailored for businesses that need an effective online presence.", icon: "Globe" },
-  { title: "Portfolio Websites", description: "Personal portfolio sites that showcase your work and tell your story with style.", icon: "User" },
-  { title: "Full-Stack Web Applications", description: "End-to-end web applications with modern frontend, robust backend, and scalable databases.", icon: "Layers" },
-  { title: "Landing Pages", description: "High-converting landing pages designed to capture attention and drive action.", icon: "Rocket" },
-  { title: "Admin Dashboards", description: "Clean, intuitive admin panels for managing data, users, and business operations.", icon: "LayoutDashboard" },
-  { title: "Appointment & Booking Systems", description: "Custom scheduling and queue management solutions like QueueBook.", icon: "Calendar" },
-  { title: "Database-Driven Applications", description: "Applications built around well-designed data models and efficient database operations.", icon: "Database" },
-  { title: "AI-Powered Web Applications", description: "Integrating AI and ML capabilities into web products for smarter user experiences.", icon: "Brain" },
-  { title: "API Integration", description: "Connecting third-party services and building RESTful APIs to power your applications.", icon: "Plug" },
-  { title: "Custom Software Solutions", description: "Bespoke software built to solve specific business problems that off-the-shelf tools can't.", icon: "Cog" },
+  { title: "Business Websites", description: "A clean, fast website for your shop, clinic, restaurant or salon — so customers can find you on Google and trust you instantly.", icon: "Globe", shown: true },
+  { title: "Appointment & Booking Systems", description: "Let customers book online (saloons, clinics, consultants) instead of calling — fewer missed calls, no double-booking.", icon: "Calendar", shown: true },
+  { title: "Online Order / Enquiry Forms", description: "Turn casual visitors into leads with a simple enquiry, quote or order form that sends messages straight to your WhatsApp or email.", icon: "Layers", shown: true },
+  { title: "Landing Pages & Ads", description: "A focused one-page site or landing page for a new product, offer or ad campaign — built to convert visitors into customers.", icon: "Rocket", shown: true },
+  { title: "Admin Dashboards", description: "See your bookings, enquiries, customers and business data in one clean dashboard instead of notebooks and spreadsheets.", icon: "LayoutDashboard", shown: true },
+  { title: "Custom / Business Software", description: "Tailor-made tools for your specific business process that off-the-shelf apps can't do — from inventory to client management.", icon: "Cog", shown: true },
+  // Technical services kept but de-emphasised for local-business focus
+  { title: "Full-Stack Web Applications", description: "End-to-end web applications with modern frontend, robust backend, and scalable databases.", icon: "Database", shown: false },
+  { title: "Database-Driven Applications", description: "Applications built around well-designed data models and efficient database operations.", icon: "Database", shown: false },
+  { title: "AI-Powered Web Applications", description: "Integrating AI and ML capabilities into web products for smarter user experiences.", icon: "Brain", shown: false },
+  { title: "API Integration", description: "Connecting third-party services and building RESTful APIs to power your applications.", icon: "Plug", shown: false },
+];
+
+export const servicePricing = [
+  {
+    plan: "Starter Website",
+    audience: "Shops, clinics, salons, restaurants, tutors",
+    price: "from ₹6,000",
+    features: [
+      "Mobile-friendly website (up to 5 pages)",
+      "Contact / enquiry form",
+      "WhatsApp + Google Maps integration",
+      "Fast loading, SEO-ready",
+      "Delivered in 1 week",
+    ],
+    popular: false,
+  },
+  {
+    plan: "Business + Booking",
+    audience: "Businesses that take appointments or orders",
+    price: "from ₹12,000",
+    features: [
+      "Everything in Starter",
+      "Online booking / appointment system",
+      "Order or quote forms",
+      "Admin dashboard",
+      "Delivered in 2 weeks",
+    ],
+    popular: true,
+  },
+  {
+    plan: "Custom / App",
+    audience: "Businesses needing a tailored tool",
+    price: "Let's talk",
+    features: [
+      "Tailor-made web app / dashboard",
+      "AI features where useful",
+      "Ongoing support & maintenance",
+      "Delivered in 3-4 weeks",
+    ],
+    popular: false,
+  },
 ];
 
 export const achievements = [

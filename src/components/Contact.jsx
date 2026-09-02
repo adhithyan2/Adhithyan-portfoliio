@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Send } from "lucide-react";
+import { Mail, Github, Linkedin, Send, MessageCircle } from "lucide-react";
 import { socials, profile } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
@@ -58,8 +58,8 @@ export default function Contact() {
             custom={1}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 tracking-tight"
           >
-            Have an Idea?<br />
-            <span className="text-primary">Let's Build It.</span>
+            Ready to Grow?<br />
+            <span className="text-primary">Get a Free Consultation.</span>
           </motion.h2>
 
           <motion.p
@@ -69,7 +69,8 @@ export default function Contact() {
               theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
             }`}
           >
-            Whether it's a website, web application, AI-powered product, or a new software idea — I'm interested in turning practical ideas into working digital products.
+            Tell me about your business and what you need — I'll reply with a clear, no-pressure plan and a fair price.
+            The first consultation is always free.
           </motion.p>
 
           <motion.div
@@ -77,6 +78,16 @@ export default function Contact() {
             custom={3}
             className="flex flex-wrap gap-4 mb-12"
           >
+            {socials.whatsapp && (
+              <a
+                href={`https://wa.me/${socials.whatsapp}?text=${encodeURIComponent("Hi Adhithiyan! I'd like a free consultation for my business website.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm bg-[#25D366] text-white transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <MessageCircle size={18} /> WhatsApp Me
+              </a>
+            )}
             <a
               href={`mailto:${socials.email}`}
               className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] ${
@@ -86,30 +97,6 @@ export default function Contact() {
               }`}
             >
               <Mail size={18} /> {socials.email}
-            </a>
-            <a
-              href={socials.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] ${
-                theme === "dark"
-                  ? "bg-[#111113] border border-white/[0.06] text-white hover:border-primary/30"
-                  : "bg-white border border-black/[0.06] text-[#0A0A0B] shadow-sm hover:border-primary/30"
-              }`}
-            >
-              <Github size={18} /> GitHub
-            </a>
-            <a
-              href={socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] ${
-                theme === "dark"
-                  ? "bg-[#111113] border border-white/[0.06] text-white hover:border-primary/30"
-                  : "bg-white border border-black/[0.06] text-[#0A0A0B] shadow-sm hover:border-primary/30"
-              }`}
-            >
-              <Linkedin size={18} /> LinkedIn
             </a>
           </motion.div>
 

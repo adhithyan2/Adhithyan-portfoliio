@@ -1,10 +1,20 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github } from "lucide-react";
+import { ArrowDown, Github, MessageCircle } from "lucide-react";
 import { profile, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 
+function makeWhatsAppLink(text) {
+  const number = socials.whatsapp;
+  if (!number) return `mailto:${socials.email}?subject=Website%20enquiry`;
+  return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+}
+
 export default function Hero() {
   const { theme } = useTheme();
+
+  const whatsappLink = makeWhatsAppLink(
+    "Hi Adhithiyan! I'd like a website for my business. Can we talk?"
+  );
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
@@ -16,10 +26,13 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
             >
-              <span className={`inline-block text-sm font-medium tracking-widest uppercase mb-6 ${
-                theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
-              }`}>
-                {profile.role}
+              <span
+                className={`inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase mb-6 ${
+                  theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+                }`}
+              >
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                {profile.availability}
               </span>
             </motion.div>
 
@@ -29,9 +42,9 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.4, 0.25, 1] }}
               className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.08] tracking-tight mb-6"
             >
-              Building Digital<br />
-              Products That Solve<br />
-              <span className="gradient-text">Real Problems.</span>
+              {profile.headlineA}<br />
+              {profile.headlineB}<br />
+              <span className="gradient-text">{profile.headlineAccent}</span>
             </motion.h1>
 
             <motion.p
@@ -52,11 +65,20 @@ export default function Hero() {
               className="flex flex-wrap items-center justify-center lg:justify-start gap-4"
             >
               <a
-                href="#projects"
+                href="#services"
                 className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
               >
-                View My Work
+                See How I Can Help
                 <ArrowDown size={16} />
+              </a>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 font-semibold text-sm rounded-xl bg-[#25D366] text-white transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <MessageCircle size={18} />
+                Chat on WhatsApp
               </a>
               <a
                 href="#contact"
@@ -66,7 +88,7 @@ export default function Hero() {
                     : "border-black/15 text-[#0A0A0B] hover:bg-black/5"
                 }`}
               >
-                Let's Build Something
+                Get a Free Quote
               </a>
               <a
                 href={socials.github}
@@ -82,6 +104,19 @@ export default function Hero() {
                 <Github size={20} />
               </a>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className={`mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs font-medium uppercase tracking-wide ${
+                theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
+              }`}
+            >
+              <span>✓ Fast mobile-friendly sites</span>
+              <span>✓ Booking systems</span>
+              <span>✓ Free consultation</span>
+            </motion.div>
           </div>
 
           <motion.div
@@ -91,7 +126,6 @@ export default function Hero() {
             className="relative w-full lg:w-[45%] flex justify-center lg:justify-end lg:pb-0"
           >
             <div className="relative h-[320px] sm:h-[400px] md:h-[480px] lg:h-[600px] w-full flex justify-center lg:justify-end items-end">
-              {/* Animated aurora blobs (dark only) */}
               {theme === "dark" && (
                 <>
                   <div
@@ -116,7 +150,6 @@ export default function Hero() {
                   />
                 </>
               )}
-              {/* Subtle glow behind portrait */}
               <div
                 className={`absolute bottom-0 right-0 w-[300px] h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px] rounded-full ${
                   theme === "dark" ? "opacity-30" : "opacity-20"
@@ -150,42 +183,42 @@ export default function Hero() {
                 <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
                   theme === "dark" ? "text-white" : "text-[#0A0A0B]"
                 }`}>
-                  React.js
+                  Fast Websites
                 </span>
               </div>
               <div className="absolute top-[30%] -right-1 md:right-4 float-icon">
                 <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
                   theme === "dark" ? "text-white" : "text-[#0A0A0B]"
                 }`}>
-                  Node.js
+                  Online Booking
                 </span>
               </div>
               <div className="absolute top-[55%] -left-4 md:left-0 float-icon">
                 <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
                   theme === "dark" ? "text-white" : "text-[#0A0A0B]"
                 }`}>
-                  MongoDB
+                  Found on Google
                 </span>
               </div>
               <div className="absolute top-[70%] right-0 md:right-6 float-icon">
                 <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
                   theme === "dark" ? "text-white" : "text-[#0A0A0B]"
                 }`}>
-                  Python
+                  WhatsApp Leads
                 </span>
               </div>
               <div className="absolute top-[8%] right-[15%] md:right-[20%] float-icon">
                 <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
                   theme === "dark" ? "text-white" : "text-[#0A0A0B]"
                 }`}>
-                  AI/ML
+                  Mobile-friendly
                 </span>
               </div>
               <div className="absolute top-[45%] -left-6 md:left-10 float-icon">
                 <span className={`px-3 py-1.5 text-xs font-semibold rounded-lg shadow-lg glass-card ${
                   theme === "dark" ? "text-white" : "text-[#0A0A0B]"
                 }`}>
-                  Vite
+                  Get Booked More
                 </span>
               </div>
             </div>

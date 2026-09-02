@@ -207,6 +207,37 @@ function ProjectModal({ project, onClose }) {
           {project.description}
         </p>
 
+        {project.problem && project.solution && (
+          <div className={`mb-6 rounded-xl p-5 ${
+            theme === "dark" ? "bg-white/[0.03]" : "bg-black/[0.02]"
+          }`}>
+            <h4 className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+              The Business Problem
+            </h4>
+            <p className="text-sm mb-3">{project.problem}</p>
+            <h4 className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+              How I Solved It
+            </h4>
+            <p className="text-sm mb-3">{project.solution}</p>
+            <h4 className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+              The Result
+            </h4>
+            <p className="text-sm">{project.result}</p>
+            {project.metrics && (
+              <div className="flex flex-wrap gap-6 mt-4">
+                {project.metrics.map((m) => (
+                  <div key={m.label}>
+                    <div className="text-2xl font-bold text-primary">{m.value}</div>
+                    <div className={`text-xs ${theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"}`}>
+                      {m.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {project.features && (
           <div className="mb-6">
             <h4 className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
