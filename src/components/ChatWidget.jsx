@@ -34,7 +34,7 @@ export default function ChatWidget() {
     setInput("");
     setLoading(true);
 
-    try {
+    const attempt = async () => {
       const res = await fetch(lyzr.endpoint, {
         method: "POST",
         headers: {
@@ -45,23 +45,56 @@ export default function ChatWidget() {
           session_id: getSessionId(),
         }),
       });
-
       if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`API error ${res.status}: ${errText.slice(0, 200)}`);
+        throw new Error(`API error ${res.status}: ${(await res.text()).slice(0, 200)}`);
       }
+      return await res.json();
+    };
 
-      const data = await res.json();
-      const reply = data?.response || data?.message || data?.content || JSON.stringify(data);
+    let data;
+    try {
+      data = await attempt();
+    } catch (firstErr) {
+      // One automatic retry — Lyzr occasionally 500s transiently.
+      try {
+        data = await attempt();
+      } catch (secondErr) {
+        // Live agent is down — fall back to a local answer.
+        setMessages((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content: `The live agent is briefly unreachable, but here's a quick answer:\n\n${fallbackReply(text)}\n\nTry again in a moment for a full response.`,
+          },
+        ]);
+        setLoading(false);
+        return;
+      }
+    }
+
+    const reply = data?.response || data?.message || data?.content;
+    if (reply) {
       setMessages((m) => [...m, { role: "assistant", content: reply }]);
-    } catch (err) {
+    } else {
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: `Sorry, I couldn't reach the agent: ${err.message}` },
+        {
+          role: "assistant",
+          content: `The live agent is briefly unreachable, but here's a quick answer:\n\n${fallbackReply(text)}\n\nTry again in a moment for a full response.`,
+        },
       ]);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
+  };
+
+  const fallbackReply = (q) => {
+    const s = q.toLowerCase();
+    if (s.includes("contact") || s.includes("email") || s.includes("reach")) return "You can email Adhithiyan at adhithiyanprabaharan@gmail.com, or find GitHub and LinkedIn buttons in the Contact section below.";
+    if (s.includes("skill") || s.includes("tech") || s.includes("stack") || s.includes("language")) return "Adhithiyan works with: Python, Java, C++, JavaScript, React.js, Vite, Tailwind CSS, Node.js, Express.js, MongoDB, MySQL, Git, GitHub, Firebase, and more. He's into Full-Stack development, AI/ML, and open source.";
+    if (s.includes("project") || s.includes("work") || s.includes("build")) return "His projects include QueueBook (appointment management), Namma Uzhavan (smart agriculture), FAC (facial attendance), AI Meeting Buddy, TemplateMind AI (PDF editing), and a Smart Traffic system. Buttons to his GitHub are in the Projects / Open Source sections.";
+    if (s.includes("background") || s.includes("about") || s.includes("who")) return "Adhithiyan Prabaharan is a Full-Stack Developer and B.Tech CSBS student at Jansons Institute of Technology, India. He loves building digital products that solve real problems and is building an open-source freelancer ecosystem.";
+    if (s.includes("hire") || s.includes("work with") || s.includes("freelance")) return "Yes, he's open to freelance work! Use the Contact section to email him or reach out on LinkedIn.";
+    return "Great question! The live agent is temporarily down. Meanwhile, here's a hint: email Adhithiyan at adhithiyanprabaharan@gmail.com or check the Projects section — he's a full-stack developer specializing in web apps, AI, and open source.";
   };
 
   return (
