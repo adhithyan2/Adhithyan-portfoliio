@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Send, MessageCircle } from "lucide-react";
-import { socials, profile } from "../data/portfolioData";
+import { Mail, Github, Linkedin, Send, MessageCircle, Check } from "lucide-react";
+import { socials, profile, contactForm } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
 import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
@@ -9,20 +9,20 @@ import SectionLabel from "./SectionLabel";
 export default function Contact() {
   const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", business: "", message: "" });
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
   const validate = () => {
     const errs = {};
     if (!form.name.trim()) errs.name = "Name is required";
     if (!form.email.trim()) errs.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Invalid email";
-    if (!form.message.trim()) errs.message = "Message is required";
+    if (!form.message.trim()) errs.message = "Please tell me a little about your business";
     return errs;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) {
@@ -30,10 +30,28 @@ export default function Contact() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
-    const mailtoLink = `mailto:${socials.email}?subject=Portfolio Inquiry from ${encodeURIComponent(form.name)}&body=${encodeURIComponent(form.message + "\n\nFrom: " + form.name + " (" + form.email + ")")}`;
-    window.location.href = mailtoLink;
-    setTimeout(() => setSubmitted(false), 3000);
+    setStatus("sending");
+    try {
+      const res = await fetch(contactForm.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          business: form.business,
+          message: form.message,
+          _subject: `New business lead: ${form.business || form.name}`,
+        }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", business: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -141,6 +159,20 @@ export default function Contact() {
                 />
                 {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
               </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Business / Type</label>
+                <input
+                  type="text"
+                  value={form.business}
+                  onChange={(e) => setForm({ ...form, business: e.target.value })}
+                  className={`w-full px-4 py-3 rounded-xl text-sm outline-none transition-colors ${
+                    theme === "dark"
+                      ? "bg-[#1A1A1D] border border-white/[0.08] text-white focus:border-primary/40"
+                      : "bg-[#F8F9FA] border border-black/[0.08] text-[#0A0A0B] focus:border-primary/40"
+                  }`}
+                  placeholder="e.g. Salon, Clinic, Restaurant... (optional)"
+                />
+              </div>
             </div>
             <div className="mb-6">
               <label className="block text-sm font-medium mb-2">Message</label>
@@ -153,17 +185,24 @@ export default function Contact() {
                     ? "bg-[#1A1A1D] border border-white/[0.08] text-white focus:border-primary/40"
                     : "bg-[#F8F9FA] border border-black/[0.08] text-[#0A0A0B] focus:border-primary/40"
                 } ${errors.message ? "border-red-500/60" : ""}`}
-                placeholder="Tell me about your project or idea..."
+                placeholder="Tell me about your business and what you need..."
               />
               {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
             </div>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+              disabled={status === "sending"}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-[#0A0A0B] font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 disabled:hover:scale-100"
             >
-              {submitted ? "Sent!" : "Send Message"}
-              <Send size={16} />
+              {status === "sending" ? "Sending..." : status === "sent" ? "Sent! I'll get back to you" : "Get My Free Quote"}
+              {status === "sent" ? <Check size={16} /> : <Send size={16} />}
             </button>
+            {status === "sent" && (
+              <p className="text-green-400 text-sm mt-3">Thanks! Your enquiry is on its way — I'll reply within 24 hours.</p>
+            )}
+            {status === "error" && (
+              <p className="text-red-400 text-sm mt-3">Something went wrong. Please email me directly at {socials.email} — sorry for the trouble.</p>
+            )}
           </motion.form>
         </motion.div>
       </div>

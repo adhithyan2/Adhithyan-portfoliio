@@ -27,6 +27,13 @@ export const socials = {
   phone: "",
 };
 
+// Formspree endpoint for the contact form (works on all devices, no backend needed).
+// Free tier: 50 submissions/month. Replace with your real form ID after creating one
+// at https://formspree.io  → New Form → e.g. "https://formspree.io/f/xxxxxxxx"
+export const contactForm = {
+  endpoint: "https://formspree.io/f/mwlkbzve",
+};
+
 export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
