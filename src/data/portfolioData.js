@@ -8,7 +8,7 @@ export const profile = {
   tagline: "Building Digital Products That Solve Real Problems.",
   // Client-first sub-line (plain language, for small businesses).
   subtitle:
-    "I build fast, mobile-friendly websites, booking systems and smart tools for shops, clinics, salons, restaurants and service businesses — so you get found online and booked more.",
+    "I build fast, mobile-friendly websites, booking systems and smart tools for shops, clinics, salons, restaurants and service businesses across India - so you get found online and booked more.",
   education: "B.Tech Computer Science and Business Systems (CSBS), Jansons Institute of Technology",
   location: "India",
   resumeUrl: "#",
