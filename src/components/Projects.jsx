@@ -30,7 +30,7 @@ function ProjectCard({ project, index, onOpen }) {
           onClick={() => onOpen(project)}
           className={`group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
             theme === "dark"
-              ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(255,42,42,0.08)]"
+              ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
               : "hover:border-primary/30 shadow-sm hover:shadow-lg"
           }`}
         >
@@ -106,7 +106,7 @@ function ProjectCard({ project, index, onOpen }) {
         onClick={() => onOpen(project)}
         className={`group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 glass-card ${
           theme === "dark"
-            ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(255,42,42,0.08)]"
+            ? "hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.08)]"
               : "hover:border-primary/30 shadow-sm hover:shadow-lg"
           }`}
       >
@@ -376,7 +376,7 @@ export default function Projects() {
                 onClick={() => setFilter(f)}
                 className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-200 ${
                   filter === f
-                    ? "bg-primary text-[#0A0A0B] shadow-[0_4px_20px_rgba(255,42,42,0.25)]"
+                    ? "bg-primary text-[#0A0A0B] shadow-[0_4px_20px_rgba(0,212,170,0.25)]"
                     : theme === "dark"
                     ? "bg-white/[0.06] text-[#8A8A8E] hover:bg-white/[0.1] hover:text-white"
                     : "bg-black/[0.04] text-[#6B6B70] hover:bg-black/[0.08] hover:text-[#0A0A0B]"

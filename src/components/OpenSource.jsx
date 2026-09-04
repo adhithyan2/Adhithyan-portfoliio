@@ -47,10 +47,10 @@ function ContributionGraph() {
 
   const getColor = (level) => {
     if (theme === "dark") {
-      const colors = ["#161617", "#4a1010", "#8b1a1a", "#cc2222", "#ff2a2a"];
+      const colors = ["#161617", "#0e4429", "#006d32", "#26a641", "#39d353"];
       return colors[level];
     }
-    const colors = ["#ebedf0", "#f5a0a0", "#e05555", "#cc2222", "#991818"];
+    const colors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
     return colors[level];
   };
 

@@ -71,7 +71,7 @@ export default function Services() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className={`group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
                   theme === "dark"
-                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(255,42,42,0.06)]"
+                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.06)]"
                     : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-md"
                 }`}
               >
@@ -100,8 +100,8 @@ export default function Services() {
               style={{
                 background:
                   theme === "dark"
-                    ? "radial-gradient(circle, rgba(255,42,42,0.15) 0%, transparent 70%)"
-                    : "radial-gradient(circle, rgba(180,30,30,0.1) 0%, transparent 70%)",
+                    ? "radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 70%)"
+                    : "radial-gradient(circle, rgba(11,122,92,0.1) 0%, transparent 70%)",
               }}
             />
             <h3 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">

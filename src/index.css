@@ -88,18 +88,18 @@ body {
 }
 
 ::selection {
-  background-color: #ff2a2a;
+  background-color: #00D4AA;
   color: #0A0A0B;
 }
 
 .gradient-text {
   background: linear-gradient(
     135deg,
-    #ff2a2a 0%,
-    #ff4444 25%,
-    #ff6b6b 50%,
-    #ff2a2a 75%,
-    #cc2222 100%
+    #00D4AA 0%,
+    #00E5BB 25%,
+    #5EFCE8 50%,
+    #00D4AA 75%,
+    #00B894 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -116,11 +116,11 @@ body {
 .light .gradient-text {
   background-image: linear-gradient(
     135deg,
-    #b41e1e 0%,
-    #cc2222 25%,
-    #dd3333 50%,
-    #b41e1e 75%,
-    #991818 100%
+    #0B7A5C 0%,
+    #0E8A6C 25%,
+    #159A7F 50%,
+    #0B7A5C 75%,
+    #09664E 100%
   );
 }
 
@@ -143,14 +143,14 @@ body {
   display: inline-block;
   width: 2px;
   height: 1.1em;
-  background: #ff2a2a;
+  background: #00D4AA;
   margin-left: 2px;
   vertical-align: text-bottom;
   animation: blink 1s step-end infinite;
 }
 
 .light .terminal-cursor {
-  background: #b41e1e;
+  background: #0B7A5C;
 }
 
 @keyframes blink {
@@ -176,15 +176,15 @@ body {
 }
 
 :root {
-  --primary: 255 42 42;
+  --primary: 0 212 170;
 }
 
 .dark {
-  --primary: 255 42 42;
+  --primary: 0 212 170;
 }
 
 .light {
-  --primary: 180 30 30;
+  --primary: 11 122 92;
 }
 
 .music-eq {
