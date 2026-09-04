@@ -4,33 +4,27 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
 import { navLinks } from "../data/portfolioData";
 
-export default function Navbar() {
+export default function Navbar({ currentView = "home", onNavigate }) {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [active, setActive] = useState("#home");
+  const active = currentView === "home" ? "#home" : `#${currentView}`;
+
+  const go = (view) => {
+    if (onNavigate) {
+      onNavigate(view);
+      setMobileOpen(false);
+      return;
+    }
+    // Fallback: default anchor scroll behavior.
+    const el = document.getElementById(view);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = navLinks
-      .map((l) => document.getElementById(l.href.slice(1)))
-      .filter(Boolean);
-    if (!sections.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(`#${e.target.id}`);
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -57,36 +51,39 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-[1320px] mx-auto px-6 h-16 flex items-center justify-between">
-          <a
-            href="#home"
-            className="text-lg font-bold tracking-tight text-primary"
+          <button
+            onClick={() => go("home")}
+            className="text-lg font-bold tracking-tight text-primary cursor-pointer"
           >
             AP
-          </a>
+          </button>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 relative ${
-                  active === link.href
-                    ? "text-primary"
-                    : theme === "dark"
-                    ? "text-[#8A8A8E] hover:text-white"
-                    : "text-[#6B6B70] hover:text-[#0A0A0B]"
-                }`}
-              >
-                {link.label}
-                {active === link.href && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const view = link.href.replace("#", "");
+              return (
+                <button
+                  key={link.href}
+                  onClick={() => go(view)}
+                  className={`text-sm font-medium transition-colors duration-200 relative cursor-pointer ${
+                    active === link.href
+                      ? "text-primary"
+                      : theme === "dark"
+                      ? "text-[#8A8A8E] hover:text-white"
+                      : "text-[#6B6B70] hover:text-[#0A0A0B]"
+                  }`}
+                >
+                  {link.label}
+                  {active === link.href && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg transition-colors duration-200 hover:bg-white/10"
@@ -135,25 +132,27 @@ export default function Navbar() {
                 <X size={24} />
               </button>
               <div className="flex flex-col items-center gap-8">
-                {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.06 }}
-                    onClick={() => setMobileOpen(false)}
-                    className={`text-2xl font-semibold transition-colors duration-200 ${
-                      active === link.href
-                        ? "text-primary"
-                        : theme === "dark"
-                        ? "text-[#8A8A8E] hover:text-white"
-                        : "text-[#6B6B70] hover:text-[#0A0A0B]"
-                    }`}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
+                {navLinks.map((link, i) => {
+                  const view = link.href.replace("#", "");
+                  return (
+                    <motion.button
+                      key={link.href}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.06 }}
+                      onClick={() => go(view)}
+                      className={`text-2xl font-semibold transition-colors duration-200 cursor-pointer ${
+                        active === link.href
+                          ? "text-primary"
+                          : theme === "dark"
+                          ? "text-[#8A8A8E] hover:text-white"
+                          : "text-[#6B6B70] hover:text-[#0A0A0B]"
+                      }`}
+                    >
+                      {link.label}
+                    </motion.button>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
