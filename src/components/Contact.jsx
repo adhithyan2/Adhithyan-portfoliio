@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Mail, Github, Linkedin, Send, MessageCircle, Check } from "lucide-react";
 import { socials, profile, contactForm } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
@@ -9,9 +10,16 @@ import SectionLabel from "./SectionLabel";
 export default function Contact() {
   const { theme } = useTheme();
   const { ref, controls } = useScrollReveal();
+  const sectionRef = useRef(null);
   const [form, setForm] = useState({ name: "", email: "", business: "", message: "" });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const bgTextY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   const validate = () => {
     const errs = {};
@@ -55,8 +63,19 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32">
-      <div className="max-w-[1320px] mx-auto px-6">
+    <section id="contact" ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden">
+      <motion.div
+        style={{ y: bgTextY }}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none whitespace-nowrap ${
+          theme === "dark" ? "text-white/[0.03]" : "text-black/[0.03]"
+        }`}
+      >
+        <span className="text-[25vw] font-black leading-none tracking-tighter" style={{ fontFamily: "Impact, Arial Black, sans-serif" }}>
+          CONTACT
+        </span>
+      </motion.div>
+
+      <div className="max-w-[1320px] mx-auto px-6 relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"

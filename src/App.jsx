@@ -18,6 +18,7 @@ import ChatWidget from "./components/ChatWidget";
 import MusicPlayer from "./components/MusicPlayer";
 import BackToTop from "./components/BackToTop";
 import NotFound from "./components/NotFound";
+import Preloader from "./components/Preloader";
 
 const SECTION_VIEWS = {
   about: About,
@@ -33,6 +34,7 @@ export default function App() {
   const isRoot = path === "/" || path === "/index.html";
 
   const [view, setView] = useState("home");
+  const [preloaded, setPreloaded] = useState(false);
 
   const navigate = useCallback((next) => {
     setView(next);
@@ -47,6 +49,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      {!preloaded && <Preloader onComplete={() => setPreloaded(true)} />}
       <Cursor />
       <div className="grain" aria-hidden="true" />
       <ScrollProgress />

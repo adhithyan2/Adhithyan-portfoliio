@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { socials, activityData } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 const GH_USERNAME = "adhithyan2";
@@ -34,7 +33,7 @@ function ContributionGraph() {
         if (cancelled || !data?.contributions) return;
         const weeks = data.contributions;
         const flat = weeks.flatMap((w) => w);
-        const recent = flat.slice(-91); // ~13 weeks, fits layout
+        const recent = flat.slice(-91);
         if (recent.length > 0) {
           setCells(recent.map((item) => ({ level: getLevel(item.count || 0), count: item.count || 0 })));
           setSource("live");
@@ -48,10 +47,10 @@ function ContributionGraph() {
 
   const getColor = (level) => {
     if (theme === "dark") {
-      const colors = ["#161617", "#0e4429", "#006d32", "#26a641", "#39d353"];
+      const colors = ["#161617", "#4a1010", "#8b1a1a", "#cc2222", "#ff2a2a"];
       return colors[level];
     }
-    const colors = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+    const colors = ["#ebedf0", "#f5a0a0", "#e05555", "#cc2222", "#991818"];
     return colors[level];
   };
 
@@ -83,27 +82,26 @@ function ContributionGraph() {
 
 export default function OpenSource() {
   const { theme } = useTheme();
-  const { ref, controls } = useScrollReveal();
 
   return (
     <section id="opensource" className="py-24 md:py-32">
       <div className="max-w-[1320px] mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-        >
+        <div>
           <motion.span
-            variants={fadeUp}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
             <SectionLabel index="06">Open Source</SectionLabel>
           </motion.span>
 
           <motion.h2
-            variants={fadeUp}
-            custom={1}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 tracking-tight"
           >
             Building in Public.<br />
@@ -111,8 +109,10 @@ export default function OpenSource() {
           </motion.h2>
 
           <motion.p
-            variants={fadeUp}
-            custom={2}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
             className={`text-base md:text-lg mb-12 max-w-2xl leading-relaxed ${
               theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
             }`}
@@ -121,8 +121,10 @@ export default function OpenSource() {
           </motion.p>
 
           <motion.div
-            variants={fadeUp}
-            custom={3}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-wrap gap-4 mb-16"
           >
             <a
@@ -145,7 +147,12 @@ export default function OpenSource() {
             </a>
           </motion.div>
 
-          <motion.div variants={fadeUp} custom={4}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <h3 className={`text-sm font-semibold tracking-widest uppercase mb-4 ${
               theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
             }`}>
@@ -159,7 +166,7 @@ export default function OpenSource() {
               <ContributionGraph />
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

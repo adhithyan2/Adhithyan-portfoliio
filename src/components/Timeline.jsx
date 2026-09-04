@@ -1,33 +1,30 @@
 import { motion } from "framer-motion";
 import { timeline } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 export default function Timeline() {
   const { theme } = useTheme();
-  const { ref, controls } = useScrollReveal();
 
   return (
     <section id="experience" className="py-24 md:py-32">
       <div className="max-w-[1320px] mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-          className="max-w-3xl"
-        >
+        <div className="max-w-3xl">
           <motion.span
-            variants={fadeUp}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
             <SectionLabel index="04">Journey</SectionLabel>
           </motion.span>
 
           <motion.h2
-            variants={fadeUp}
-            custom={1}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
             The Path So Far.
@@ -42,8 +39,10 @@ export default function Timeline() {
               {timeline.map((item, i) => (
                 <motion.div
                   key={item.stage}
-                  variants={fadeUp}
-                  custom={i + 2}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="flex gap-6"
                 >
                   <div className="flex-shrink-0 relative">
@@ -72,7 +71,7 @@ export default function Timeline() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

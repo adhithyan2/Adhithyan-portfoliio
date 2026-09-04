@@ -221,8 +221,8 @@ export default function ChatWidget() {
         onClick={() => setOpen((o) => !o)}
         className={`fixed bottom-6 right-5 md:right-6 z-[90] w-14 h-14 rounded-2xl bg-primary text-[#0A0A0B] flex items-center justify-center ${
           theme === "dark"
-            ? "shadow-[0_8px_30px_rgba(0,212,170,0.35)]"
-            : "shadow-[0_8px_30px_rgba(11,122,92,0.25)]"
+            ? "shadow-[0_8px_30px_rgba(255,42,42,0.35)]"
+            : "shadow-[0_8px_30px_rgba(180,30,30,0.25)]"
         }`}
         aria-label="Open AI chat"
       >

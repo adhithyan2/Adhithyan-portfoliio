@@ -21,7 +21,7 @@ export default function Hero() {
                   theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
                 }`}
               >
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 {profile.availability}
               </span>
             </motion.div>
@@ -123,7 +123,7 @@ export default function Hero() {
                       height: 360,
                       top: "2%",
                       left: "-12%",
-                      background: "radial-gradient(circle, rgba(0,212,170,0.22) 0%, transparent 70%)",
+                      background: "radial-gradient(circle, rgba(255,42,42,0.22) 0%, transparent 70%)",
                     }}
                   />
                   <div
@@ -133,7 +133,7 @@ export default function Hero() {
                       height: 340,
                       bottom: "6%",
                       right: "-8%",
-                      background: "radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%)",
+                      background: "radial-gradient(circle, rgba(200,30,30,0.16) 0%, transparent 70%)",
                     }}
                   />
                 </>
@@ -145,8 +145,8 @@ export default function Hero() {
                 style={{
                   background:
                     theme === "dark"
-                      ? "radial-gradient(circle at center 60%, rgba(0,212,170,0.2) 0%, rgba(0,212,170,0.04) 50%, transparent 75%)"
-                      : "radial-gradient(circle at center 60%, rgba(11,122,92,0.16) 0%, rgba(11,122,92,0.04) 50%, transparent 75%)",
+                      ? "radial-gradient(circle at center 60%, rgba(255,42,42,0.2) 0%, rgba(255,42,42,0.04) 50%, transparent 75%)"
+                      : "radial-gradient(circle at center 60%, rgba(180,30,30,0.16) 0%, rgba(180,30,30,0.04) 50%, transparent 75%)",
                 }}
               />
               <picture>

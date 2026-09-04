@@ -239,8 +239,8 @@ export default function MusicPlayer() {
         className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-colors ${
           playing
             ? theme === "dark"
-              ? "bg-primary text-[#0A0A0B] shadow-[0_8px_30px_rgba(0,212,170,0.35)]"
-              : "bg-primary text-[#0A0A0B] shadow-[0_8px_30px_rgba(11,122,92,0.25)]"
+              ? "bg-primary text-[#0A0A0B] shadow-[0_8px_30px_rgba(255,42,42,0.35)]"
+              : "bg-primary text-[#0A0A0B] shadow-[0_8px_30px_rgba(180,30,30,0.25)]"
             : theme === "dark"
             ? "bg-[#111113] border border-white/10 text-[#8A8A8E] hover:text-white"
             : "bg-white border border-black/10 text-[#6B6B70] hover:text-[#0A0A0B]"

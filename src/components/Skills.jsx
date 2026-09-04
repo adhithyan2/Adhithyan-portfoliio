@@ -1,17 +1,91 @@
 import { motion } from "framer-motion";
-import { skills } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
+import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
-const skillGroups = [
-  { key: "programming", label: "Programming" },
-  { key: "frontend", label: "Frontend" },
-  { key: "backend", label: "Backend" },
-  { key: "database", label: "Database" },
-  { key: "tools", label: "Tools & Platforms" },
-  { key: "interests", label: "Areas of Interest" },
+const skillCategories = [
+  {
+    label: "Programming Languages",
+    skills: [
+      { name: "Python", level: 75 },
+      { name: "Java", level: 70 },
+      { name: "C++", level: 65 },
+      { name: "JavaScript", level: 80 },
+    ],
+  },
+  {
+    label: "Full Stack",
+    skills: [
+      { name: "React.js", level: 85 },
+      { name: "Node.js", level: 80 },
+      { name: "Express.js", level: 78 },
+      { name: "HTML/CSS", level: 90 },
+      { name: "Tailwind CSS", level: 85 },
+      { name: "Vite", level: 80 },
+    ],
+  },
+  {
+    label: "Backend",
+    skills: [
+      { name: "REST APIs", level: 82 },
+      { name: "Firebase", level: 70 },
+      { name: "WebSocket", level: 65 },
+    ],
+  },
+  {
+    label: "Databases",
+    skills: [
+      { name: "MongoDB", level: 80 },
+      { name: "MySQL", level: 75 },
+    ],
+  },
+  {
+    label: "Tools & Platforms",
+    skills: [
+      { name: "Git & GitHub", level: 85 },
+      { name: "VS Code", level: 90 },
+      { name: "Figma", level: 65 },
+      { name: "Postman", level: 75 },
+    ],
+  },
+  {
+    label: "CS Concepts",
+    skills: [
+      { name: "Data Structures", level: 78 },
+      { name: "Algorithms", level: 75 },
+      { name: "OOP", level: 82 },
+      { name: "DBMS", level: 72 },
+      { name: "UI/UX", level: 68 },
+    ],
+  },
 ];
+
+function SkillBar({ name, level, index }) {
+  const { theme } = useTheme();
+  return (
+    <div className="mb-3 last:mb-0">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className={`text-sm font-medium ${theme === "dark" ? "text-white" : "text-[#0A0A0B]"}`}>
+          {name}
+        </span>
+        <span className="text-xs font-bold text-primary">{level}%</span>
+      </div>
+      <div
+        className={`h-2 rounded-full overflow-hidden ${
+          theme === "dark" ? "bg-white/[0.08]" : "bg-black/[0.08]"
+        }`}
+      >
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 1, delay: index * 0.08, ease: [0.25, 0.4, 0.25, 1] }}
+          className="h-full rounded-full bg-primary"
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
   const { theme } = useTheme();
@@ -38,38 +112,27 @@ export default function Skills() {
             custom={1}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
-            The Tools I Work With.
+            My Skillset.
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillGroups.map((group, gi) => (
+            {skillCategories.map((cat, gi) => (
               <motion.div
-                key={group.key}
-                variants={scaleIn}
-                custom={gi * 0.5}
+                key={cat.label}
+                variants={fadeUp}
+                custom={gi + 2}
                 className={`rounded-2xl p-6 transition-all duration-300 ${
                   theme === "dark"
-                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30"
-                    : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm"
+                    ? "bg-white/[0.03] backdrop-blur-md border border-white/[0.08]"
+                    : "bg-white border border-black/[0.08] shadow-sm"
                 }`}
               >
-                <h3 className="text-sm font-semibold tracking-widest uppercase text-primary mb-4">
-                  {group.label}
+                <h3 className="text-sm font-semibold tracking-widest uppercase text-primary mb-5">
+                  {cat.label}
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills[group.key].map((skill) => (
-                    <span
-                      key={skill}
-                      className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors duration-200 ${
-                        theme === "dark"
-                          ? "bg-white/[0.06] text-[#8A8A8E] hover:bg-primary/15 hover:text-primary"
-                          : "bg-black/[0.04] text-[#6B6B70] hover:bg-primary/15 hover:text-primary"
-                      }`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                {cat.skills.map((skill, si) => (
+                  <SkillBar key={skill.name} name={skill.name} level={skill.level} index={si} />
+                ))}
               </motion.div>
             ))}
           </div>

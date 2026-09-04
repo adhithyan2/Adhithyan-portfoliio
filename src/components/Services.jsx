@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { services, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 const iconMap = {
@@ -16,7 +15,6 @@ const iconMap = {
 
 export default function Services() {
   const { theme } = useTheme();
-  const { ref, controls } = useScrollReveal();
 
   const visibleServices = services.filter((s) => s.shown);
 
@@ -29,30 +27,32 @@ export default function Services() {
   return (
     <section id="services" className="py-24 md:py-32">
       <div className="max-w-[1320px] mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-        >
+        <div>
           <motion.span
-            variants={fadeUp}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
             <SectionLabel index="05">What I Do For Businesses</SectionLabel>
           </motion.span>
 
           <motion.h2
-            variants={fadeUp}
-            custom={1}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-4 tracking-tight"
           >
             Help Your Business Grow Online.
           </motion.h2>
 
           <motion.p
-            variants={fadeUp}
-            custom={2}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
             className={`text-base md:text-lg mb-16 max-w-2xl ${
               theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
             }`}
@@ -65,11 +65,13 @@ export default function Services() {
             {visibleServices.map((service, i) => (
               <motion.div
                 key={service.title}
-                variants={scaleIn}
-                custom={i * 0.5}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 className={`group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
                   theme === "dark"
-                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(0,212,170,0.06)]"
+                    ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30 hover:shadow-[0_8px_40px_rgba(255,42,42,0.06)]"
                     : "bg-white border border-black/[0.06] hover:border-primary/30 shadow-sm hover:shadow-md"
                 }`}
               >
@@ -82,10 +84,11 @@ export default function Services() {
             ))}
           </div>
 
-          {/* CTA banner - no scary prices, just an easy conversation start */}
           <motion.div
-            variants={fadeUp}
-            custom={4}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className={`mt-16 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden ${
               theme === "dark"
                 ? "bg-[#111113] border border-white/[0.08]"
@@ -97,8 +100,8 @@ export default function Services() {
               style={{
                 background:
                   theme === "dark"
-                    ? "radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 70%)"
-                    : "radial-gradient(circle, rgba(11,122,92,0.1) 0%, transparent 70%)",
+                    ? "radial-gradient(circle, rgba(255,42,42,0.15) 0%, transparent 70%)"
+                    : "radial-gradient(circle, rgba(180,30,30,0.1) 0%, transparent 70%)",
               }}
             />
             <h3 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">
@@ -118,7 +121,7 @@ export default function Services() {
               Get a Free Quote — No Pressure
             </a>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

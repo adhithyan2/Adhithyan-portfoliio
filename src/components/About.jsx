@@ -1,30 +1,30 @@
 import { motion } from "framer-motion";
 import { profile } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 export default function About() {
   const { theme } = useTheme();
-  const { ref, controls } = useScrollReveal();
 
   return (
     <section id="about" className="py-24 md:py-32">
       <div className="max-w-[1320px] mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-          className="max-w-3xl"
-        >
-          <motion.span variants={fadeUp} className="text-primary text-sm font-semibold tracking-widest uppercase">
+        <div className="max-w-3xl">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            className="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
             <SectionLabel index="01">About</SectionLabel>
           </motion.span>
 
           <motion.h2
-            variants={fadeUp}
-            custom={1}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-8 tracking-tight"
           >
             I Build Websites That
@@ -33,8 +33,10 @@ export default function About() {
           </motion.h2>
 
           <motion.div
-            variants={fadeUp}
-            custom={2}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className={`space-y-5 text-base md:text-lg leading-relaxed ${
               theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
             }`}
@@ -60,7 +62,7 @@ export default function About() {
               And the <strong className={theme === "dark" ? "text-white" : "text-[#0A0A0B]"}>first consultation is always free</strong>.
             </p>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

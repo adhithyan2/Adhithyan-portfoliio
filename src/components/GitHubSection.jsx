@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { GitFork, Star, Database } from "lucide-react";
 import { openSourceProjects, socials } from "../data/portfolioData";
 import { useTheme } from "../hooks/useTheme";
-import { useScrollReveal, fadeUp, staggerContainer, scaleIn } from "../hooks/useScrollReveal";
 import SectionLabel from "./SectionLabel";
 
 const GH_USERNAME = "adhithyan2";
@@ -68,8 +67,6 @@ function LanguageBars({ languages, theme }) {
 
 export default function GitHubSection() {
   const { theme } = useTheme();
-  const { ref, controls } = useScrollReveal();
-  // Start with the reliable static list so the section is never blank.
   const [repos, setRepos] = useState(openSourceProjects);
   const [live, setLive] = useState(false);
   const [error, setError] = useState(false);
@@ -129,22 +126,22 @@ export default function GitHubSection() {
   return (
     <section className="py-24 md:py-32">
       <div className="max-w-[1320px] mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-        >
+        <div>
           <motion.span
-            variants={fadeUp}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
             className="text-primary text-sm font-semibold tracking-widest uppercase"
           >
             <SectionLabel index="07">Repositories</SectionLabel>
           </motion.span>
 
           <motion.h2
-            variants={fadeUp}
-            custom={1}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-16 tracking-tight"
           >
             {live ? "Live From GitHub." : "Featured Repos."}
@@ -157,8 +154,10 @@ export default function GitHubSection() {
                 href={repo.url || socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                variants={scaleIn}
-                custom={i + 2}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 className={`group rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
                   theme === "dark"
                     ? "bg-[#111113] border border-white/[0.06] hover:border-primary/30"
@@ -199,8 +198,10 @@ export default function GitHubSection() {
 
           {error && (
             <motion.p
-              variants={fadeUp}
-              custom={8}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className={`mt-6 flex items-center gap-2 text-xs ${
                 theme === "dark" ? "text-[#8A8A8E]" : "text-[#6B6B70]"
               }`}
@@ -208,7 +209,7 @@ export default function GitHubSection() {
               <Database size={14} /> Couldn't reach the GitHub API live data — showing your featured repos instead.
             </motion.p>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
